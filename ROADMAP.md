@@ -189,7 +189,37 @@ mutfak ekranı, ödeme, Z raporu, menü arama.
 | 89 | `/tutorial` final "Büyük Harita" + mock mülakat (her rolden 5 soru) |
 | 90 | Sonraki adımlar: hangi alanda derinleşeceksin? |
 
-## Bonus modüller (90. günden sonra)
+## Hangi uygulama hangi derste büyüyor? (bkz. [docs/PRODUCT.md](docs/PRODUCT.md))
+
+| Uygulama / sekme | Günler |
+|---|---|
+| Admin Panel iskeleti, Zallar & Masalar | 1, 7, 12–13 |
+| QR Menü (render türleri, cache) | 6, 39–41 |
+| Terminal: masa aç, sipariş, "Mətbəxə göndər" | 7, 9, 19–20, 26 |
+| İşçiler & Roller (RBAC) | 14–16 |
+| Dashboard & Hesabatlar (ciro, en çok satan) | 18, 36, 42 |
+| Menü (MongoDB, modifier) | 34–37 |
+| Menü arama (Elasticsearch) | 59 |
+| **Anbar** (mədaxil/məxaric, stok) | 19–20 (transaction), 50–51 (outbox/saga) |
+| **Texnoloji kart** → satışta anbardan otomatik düşme | 47–51 (Kafka stock-worker) |
+| **İnventarlaşdırma** (sayım, fark raporu) | 18, 37 |
+| Z raporu (cron) | 44 |
+| Mutfak ekranı (KDS) | 52–53 |
+| Kiosk + ödeme | 54 |
+| Restoran ayarları: timezone, release kanalı | 8, 71–72 |
+| Terminal offline | 86 |
+
+## Opsiyonel Modül 15 — Mobil (Gün 91–95)
+
+| Gün | Konu |
+|---|---|
+| 91 | React Native vs web; Expo kurulumu; telefonda Expo Go ile çalıştırma |
+| 92 | Garson modu: aynı order-service API'sini mobilden kullanmak; token'ı güvenli saklama |
+| 93 | Manager modu: canlı ciro, push notification |
+| 94 | Mobilde offline, kötü ağ koşulları |
+| 95 | Build & dağıtım (EAS), app store süreci kavramı |
+
+## Bonus modüller
 
 | Konu | Neden |
 |---|---|
