@@ -1,0 +1,23 @@
+# secrets
+.env
+.env.*
+!.env.example
+certs/
+*.pem
+
+# deps & build
+node_modules/
+.next/
+dist/
+build/
+out/
+.turbo/
+coverage/
+playwright-report/
+test-results/
+
+# misc
+.DS_Store
+Thumbs.db
+*.log
+.vercel
