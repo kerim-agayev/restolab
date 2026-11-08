@@ -12,7 +12,7 @@ NestJS, QA terimleri, system design, DevOps…) **anlamıyor**. Amaç:
 gittiği tüm yolu A'dan Z'ye, elle yaparak öğrenmek.** Kapsam: Frontend · Backend (NestJS) · SQL & NoSQL · Cache · Kafka ·
 Real-time · Arama/Log · DevOps · QA · Observability · Security/Pentest · System Design · FDE.
 
-Süre: **60 gün, günde 1 saat** (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
+Süre: **90 gün, günde 1 saat** (14 modül) (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
 
 ### Proje: RestoLab — mini restoran yönetim sistemi
 Clopos'a benzer olsun diye bilinçli seçildi; öğrenilen her şey işyerine doğrudan taşınır. UI çirkin olabilir.
@@ -117,9 +117,9 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 ```
 - `main`'e **direkt push yok** (branch protection). Her ders: `git switch -c day-XX-<konu>` → commit → `gh pr create`.
 - PR açılınca Vercel otomatik **preview URL** üretir. **QA adımı:** PR şablonundaki checklist'i kullanıcı preview'da manuel test eder;
-  7. haftadan sonra Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
+  67. günden itibaren Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
 - Commit mesajları: **Conventional Commits** (`feat:`, `fix:`, `chore:` …).
-- **Release kanalları** (7. haftada kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
+- **Release kanalları** (71–72. günlerde kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
   (`restolab-alpha.vercel.app` …). Promotion = bir üst branch'e merge. Restoranın kanalı control_db'de; web middleware'i restoranı
   kanalının deployment'ına yönlendirir. İnce ayar için ayrıca **feature flag**'ler.
 - **DB tarafı:** her PR'a Neon branch (preview DB); tenant migration'ları önce alpha restoranlarına, sonra kademeli uygulanır.
@@ -149,7 +149,7 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 - **Secret'lar:** `.env` asla commit edilmez. Yeni değişken → `.env.example` + [docs/TOKENS.md](docs/TOKENS.md) güncellenir.
 - **security-lab/** sadece `LAB_MODE=true` ve localhost'ta çalışır.
 - **Mimari kararlar** `docs/adr/NNN-*.md` olarak yazılır (ör. "Neden menü MongoDB'de?").
-- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (6. hafta).
+- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (55. gün).
 
 ## 8. Ücretsiz servis haritası (Kasım 2026'da kontrol edildi)
 

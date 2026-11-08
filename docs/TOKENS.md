@@ -1,31 +1,31 @@
 # Token & Hesap Rehberi
 
-**Kural:** Hepsini bugün alma; sadece o haftanın bölümünü yap. Aldığın her değeri `.env`'ye yaz
+**Kural:** Hepsini bugün alma; sadece o günün bölümünü yap. Aldığın her değeri `.env`'ye yaz
 (önce: `Copy-Item .env.example .env`). `.env`'yi kimseyle paylaşma, ekran görüntüsü atma.
 
 > **Neden token?** Servisler "sen kimsin?" diye sorar. Token = uygulamanın kimlik kartı. Sızarsa başkası senin adına
 > DB'ni silebilir. Bu yüzden `.env` gitignore'da ve canlı ortamda panelden girilir.
 
-| Hafta | Servis | Ne için | Kart? |
+| Gün | Servis | Ne için | Kart? |
 |---|---|---|---|
 | 1 | GitHub + `gh` CLI | repo, PR, CI | Hayır |
 | 1 | Vercel | web + preview deploy | Hayır |
-| 2 | Neon | PostgreSQL (control_db + tenant DB'leri) | Hayır |
-| 2 | (kendin üret) | auth secret'ları, internal token | — |
-| 3 | Render | NestJS servis hosting | Hayır |
-| 4 | MongoDB Atlas | menü DB'si | Hayır |
-| 4 | Upstash | Redis | Hayır |
-| 4 | Resend | e-posta | Hayır |
-| 5 | Aiven | Kafka | Hayır |
-| 5 | Stripe | ödeme (test mode) | Hayır |
-| 6 | Docker Desktop | local container | Hayır |
-| 7 | Neon API key | PR başına DB branch (CI) | Hayır |
-| 8 | Sentry | hata takibi | Hayır |
-| 8 | Grafana Cloud | log/metric/trace | Hayır |
+| 11 | Neon | PostgreSQL (control_db + tenant DB'leri) | Hayır |
+| 14 | (kendin üret) | auth secret'ları, internal token | — |
+| 32 | Render | NestJS servis hosting | Hayır |
+| 34 | MongoDB Atlas | menü DB'si | Hayır |
+| 40 | Upstash | Redis | Hayır |
+| 43 | Resend | e-posta | Hayır |
+| 45 | Aiven | Kafka | Hayır |
+| 54 | Stripe | ödeme (test mode) | Hayır |
+| 55 | Docker Desktop | local container | Hayır |
+| 69 | Neon API key | PR başına DB branch (CI) | Hayır |
+| 75 | Sentry | hata takibi | Hayır |
+| 74 | Grafana Cloud | log/metric/trace | Hayır |
 
 ---
 
-## Hafta 1
+## Gün 1
 
 ### GitHub + `gh` CLI
 1. Hesap: hazır ✅
@@ -36,9 +36,9 @@
 ### Vercel
 1. Hesap (GitHub'a bağlı): hazır ✅ — Plan: Hobby.
 2. 1. günde: Vercel → **Add New → Project** → GitHub repo'nu seç → Root Directory: `apps/web` → Deploy.
-3. (Hafta 7, CI için) Account Settings → **Tokens** → `VERCEL_TOKEN` → **GitHub Secrets**'a (`.env`'ye değil).
+3. (Gün 69, CI için) Account Settings → **Tokens** → `VERCEL_TOKEN` → **GitHub Secrets**'a (`.env`'ye değil).
 
-## Hafta 2
+## Gün 11–14
 
 ### Neon (PostgreSQL)
 1. https://neon.tech → **Sign up with GitHub**.
@@ -47,7 +47,7 @@
 4. Dashboard → **Connect**:
    - Connection pooling **açık** → `DATABASE_URL`
    - Connection pooling **kapalı** → `DATABASE_URL_UNPOOLED`
-5. (Hafta 3) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
+5. (Gün 29) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
    Aynı URL'in pooled hâlinde DB adının yerine `{db}` yaz → `TENANT_DATABASE_URL_TEMPLATE`.
 
 ### Kendi ürettiğin secret'lar
@@ -55,22 +55,22 @@ PowerShell'de her secret için bir kez çalıştır:
 ```
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
-→ `AUTH_ACCESS_TOKEN_SECRET`, `AUTH_REFRESH_TOKEN_SECRET`, (hafta 3) `INTERNAL_SERVICE_TOKEN`.
+→ `AUTH_ACCESS_TOKEN_SECRET`, `AUTH_REFRESH_TOKEN_SECRET`, (gün 22) `INTERNAL_SERVICE_TOKEN`.
 
-## Hafta 3
+## Gün 32
 
 ### Render
 1. https://render.com → GitHub ile giriş. Token gerekmez.
-2. 20. günde: New → Web Service → repo → Root: `services/order-service`. Env değişkenleri Render panelinden.
+2. 32. günde: New → Web Service → repo → Root: `services/order-service`. Env değişkenleri Render panelinden.
 3. Free servis 15 dk boşta kalınca uyur (ilk istek ~30 sn) — bunu bilerek inceleyeceğiz.
 
-## Hafta 4
+## Gün 34–43
 
 ### MongoDB Atlas
 1. https://www.mongodb.com/cloud/atlas/register → GitHub/Google ile kayıt.
 2. **Create cluster → Free (M0)** → provider fark etmez, region: **Frankfurt**.
 3. **Database Access** → Add user (username/password) — şifreyi not al.
-4. **Network Access** → Add IP → `0.0.0.0/0` (öğrenme için; Render IP'leri sabit değil. Neden riskli olduğunu 8. haftada konuşacağız).
+4. **Network Access** → Add IP → `0.0.0.0/0` (öğrenme için; Render IP'leri sabit değil. Neden riskli olduğunu güvenlik modülünde konuşacağız).
 5. Cluster → **Connect → Drivers → Node.js** → `mongodb+srv://...` → DB adı olarak `restolab_menu` ekle → `MONGODB_URI`.
 
 ### Upstash Redis
@@ -82,7 +82,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 1. https://resend.com/signup → **API Keys → Create** (Sending access) → `RESEND_API_KEY`
 2. Domain'in yoksa `EMAIL_FROM=onboarding@resend.dev` kalsın (sadece kendi mail adresine gönderebilir — yeterli).
 
-## Hafta 5
+## Gün 45–54
 
 ### Aiven Kafka (Free)
 > Upstash Kafka 2025'te kapatıldı.
@@ -95,9 +95,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ### Stripe (test mode)
 1. https://dashboard.stripe.com/register → kayıt. İşletme bilgisi istemeye başlarsa geç; **Test mode** açık kalsın.
 2. Developers → **API keys** → `pk_test_…` → `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `sk_test_…` → `STRIPE_SECRET_KEY`
-3. `STRIPE_WEBHOOK_SECRET`: 35. günde Stripe CLI (`stripe listen`) ile birlikte alacağız.
+3. `STRIPE_WEBHOOK_SECRET`: 54. günde Stripe CLI (`stripe listen`) ile birlikte alacağız.
 
-## Hafta 6
+## Gün 55
 
 ### Docker Desktop (Windows 10 Home)
 1. PowerShell'i **Yönetici olarak** aç → `wsl --install` → yeniden başlat.
@@ -105,14 +105,14 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 3. Kontrol: `docker run hello-world`. Elasticsearch için **en az 8 GB RAM** önerilir.
 4. Kubernetes: `winget install Kubernetes.kind` ve `winget install Kubernetes.kubectl`.
 
-## Hafta 7
+## Gün 69
 
 ### Neon API key
 1. Neon Console → Account settings → **API keys → Create** → `NEON_API_KEY` (GitHub Secrets'a da ekle).
 2. Proje Settings → Project ID → `NEON_PROJECT_ID`.
    (Alternatif: Vercel Marketplace → Neon entegrasyonu her preview için otomatik DB branch açar — birlikte karşılaştıracağız.)
 
-## Hafta 8
+## Gün 74–78
 
 ### Sentry
 1. https://sentry.io/signup → **Developer (free)** → Create Project → Next.js → DSN → `SENTRY_DSN`, `NEXT_PUBLIC_SENTRY_DSN`
