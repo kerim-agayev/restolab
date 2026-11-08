@@ -6,6 +6,12 @@ export default function Home() {
       <p className="text-sm text-zinc-500">
         Ortam: {process.env.RELEASE_CHANNEL ?? "unknown"}
       </p>
+      <a
+        className="text-sm underline"
+        href="https://github.com/kerim-agayev/restolab"
+      >
+        GitHub repo
+      </a>
     </main>
   );
 }

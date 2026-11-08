@@ -12,12 +12,23 @@ NestJS, QA terimleri, system design, DevOps…) **anlamıyor**. Amaç:
 gittiği tüm yolu A'dan Z'ye, elle yaparak öğrenmek.** Kapsam: Frontend · Backend (NestJS) · SQL & NoSQL · Cache · Kafka ·
 Real-time · Arama/Log · DevOps · QA · Observability · Security/Pentest · System Design · FDE.
 
-Süre: **60 gün, günde 1 saat** (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
+Süre: **90 gün, günde 1 saat** (14 modül) (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
 
-### Proje: RestoLab — mini restoran yönetim sistemi
+### Proje: RestoLab — mini restoran yönetim sistemi (ürün ailesi)
 Clopos'a benzer olsun diye bilinçli seçildi; öğrenilen her şey işyerine doğrudan taşınır. UI çirkin olabilir.
-Özellikler: restoran (tenant) kaydı, kullanıcı/rol (owner, manager, waiter), menü (modifier'lı), masa & sipariş, mutfak ekranı
-(gerçek zamanlı), ödeme (Stripe test), gün sonu raporu (Z raporu), menü arama, e-posta fişi.
+Tam tanıtım: [docs/PRODUCT.md](docs/PRODUCT.md). Clopos gibi **aynı backend'i kullanan birden fazla client**:
+
+| App | Clopos karşılığı | Başlangıç |
+|---|---|---|
+| `apps/web` Admin Panel (Dashboard, Menü, Anbar, Texnoloji kart, İnventarlaşdırma, Hesabatlar, Zallar, İşçiler, QR, Ayarlar) + `/tutorial` | client | Gün 1 |
+| `apps/qr-menu` | QR menü | Gün 6 |
+| `apps/terminal` POS (PWA, offline) | Terminal | Gün 7 |
+| `apps/kds` Mutfak ekranı | KDS | Gün 52 |
+| `apps/kiosk` Self-servis | Kiosk (Subway) | Gün 54 |
+| `apps/mobile` Garson + Manager (Expo) | Ofisiant app, Clopos Manager | Opsiyonel Modül 15 |
+
+Kural: her yeni özellik **minimum** yapılır (1 saatlik ders). Amaç kavramı göstermek, ürünü bitirmek değil.
+Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric, ofisiant, inventarlaşdırma, zal) — kod/UI'da da bunları kullanabilirsin.
 
 ### Clopos'ta bilinen pratikler (kullanıcının anlattığı — RestoLab'da birebir uygulanacak)
 1. **PR başına preview deploy:** developer branch açar → PR → `pr-5545.client.clopos.menu` gibi bir preview ortamı → QA test eder → `main`'e merge.
@@ -90,7 +101,12 @@ Kullanıcı SQL vs NoSQL farkını aynı domain'de görür.
 senior_enginer/
 ├── CLAUDE.md, ROADMAP.md, .env.example, pnpm-workspace.yaml, turbo.json
 ├── docs/                   TOKENS.md, GLOSSARY.md, ARCHITECTURE.md, PROGRESS.md, adr/
-├── apps/web/               Next.js — UI, /tutorial, BFF, control plane (Prisma)      → Vercel
+├── apps/web/               Admin Panel — Next.js, /tutorial, BFF, control plane (Prisma) → Vercel
+├── apps/qr-menu/           QR Menü — Next.js (statik + cache)                         → Vercel
+├── apps/terminal/          POS Terminal — Next.js PWA (offline-first)                 → Vercel
+├── apps/kds/               Mutfak ekranı — Next.js + WebSocket                         → Vercel
+├── apps/kiosk/             Self-servis kiosk — Next.js + Stripe                        → Vercel
+├── apps/mobile/            (opsiyonel) Expo — garson + manager modları
 ├── services/
 │   ├── order-service/      NestJS + Drizzle + per-tenant Postgres + Kafka producer    → Render
 │   ├── menu-service/       NestJS + Mongoose + MongoDB                                → Render
@@ -117,9 +133,9 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 ```
 - `main`'e **direkt push yok** (branch protection). Her ders: `git switch -c day-XX-<konu>` → commit → `gh pr create`.
 - PR açılınca Vercel otomatik **preview URL** üretir. **QA adımı:** PR şablonundaki checklist'i kullanıcı preview'da manuel test eder;
-  7. haftadan sonra Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
+  67. günden itibaren Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
 - Commit mesajları: **Conventional Commits** (`feat:`, `fix:`, `chore:` …).
-- **Release kanalları** (7. haftada kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
+- **Release kanalları** (71–72. günlerde kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
   (`restolab-alpha.vercel.app` …). Promotion = bir üst branch'e merge. Restoranın kanalı control_db'de; web middleware'i restoranı
   kanalının deployment'ına yönlendirir. İnce ayar için ayrıca **feature flag**'ler.
 - **DB tarafı:** her PR'a Neon branch (preview DB); tenant migration'ları önce alpha restoranlarına, sonra kademeli uygulanır.
@@ -149,7 +165,7 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 - **Secret'lar:** `.env` asla commit edilmez. Yeni değişken → `.env.example` + [docs/TOKENS.md](docs/TOKENS.md) güncellenir.
 - **security-lab/** sadece `LAB_MODE=true` ve localhost'ta çalışır.
 - **Mimari kararlar** `docs/adr/NNN-*.md` olarak yazılır (ör. "Neden menü MongoDB'de?").
-- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (6. hafta).
+- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (55. gün).
 
 ## 8. Ücretsiz servis haritası (Kasım 2026'da kontrol edildi)
 
