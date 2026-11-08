@@ -53,6 +53,9 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
 7. **Her ders bir `/tutorial` sayfası üretir** (§6).
 8. **Ders sonunda** [docs/PROGRESS.md](docs/PROGRESS.md) güncellenir; yeni terimler [docs/GLOSSARY.md](docs/GLOSSARY.md)'ye eklenir.
 9. **Şirket köprüsü:** Her konuda "Clopos reposunda bunu nerede arayabilirsin / backend'ci hangi cümleyle söyler" bölümü olsun.
+11. **Junior seviyesinde anlat (Gün 1 dersi).** Kullanıcı hızlı ve terim yoğun anlatımda kayboluyor. Panel/terminal işlerinde
+    **tek seferde tek adım**, tam buton/menü adı ve **beklenen ekran çıktısı** ver. Her dersin sonunda: (a) "bugün ne yaptık"
+    benzetmeli özet, (b) terim tablosu, (c) quiz, (d) **"UI'da ne görmelisin"** bölümü (hangi URL'de hangi yazı).
 10. **Ezme.** Bir derste en fazla 3–4 yeni terim. SQL ↔ NoSQL gibi karşılaştırmalarda aynı veriyi iki tarafta yan yana göster.
 
 ## 3. Oturum başlangıç protokolü
