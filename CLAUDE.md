@@ -146,7 +146,11 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 
 ## 6. `/tutorial` kuralları
 
-- Yol: `apps/web/app/tutorial/[slug]/page.tsx`; `/tutorial` tüm dersleri gün sırasıyla listeler.
+- Yol: `apps/web/app/tutorial/<gün>/page.tsx` (ör. `/tutorial/3`). Yeni günü `components/tutorial/lessons.ts`'e ekle → `/tutorial`
+  listesi ve önceki/sonraki linkleri otomatik güncellenir. Güne özel interaktif parçalar o günün klasöründe (`tutorial/3/HttpLab.tsx`).
+- Ortak bileşenler (`components/tutorial/`): `FlowPlayer` (animasyonlu akış), `SortGame` (dnd-kit sürükle-bırak), `Quiz`,
+  `TutorialShell` + `Section` + `Note`. Lab endpoint'leri: `app/api/tutorial/<konu>/route.ts`.
+- JSX metninde düz `'` kullanma (lint: `react/no-unescaped-entities`) → `’` kullan.
 - Her sayfada: (a) **animasyonlu akış diyagramı** (istek kutudan kutuya yanar), (b) **drag & drop alıştırma** (adımları sıraya diz),
   (c) **"Kır" butonları** (bilinçli hata), (d) **canlı log paneli** (requestId ile), (e) 3 soruluk quiz.
 - Kütüphaneler: `@dnd-kit/core`, `motion`. CSS önemsiz — sade Tailwind.
@@ -169,6 +173,9 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 - **security-lab/** sadece `LAB_MODE=true` ve localhost'ta çalışır.
 - **Mimari kararlar** `docs/adr/NNN-*.md` olarak yazılır (ör. "Neden menü MongoDB'de?").
 - **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (55. gün).
+  PowerShell'de içinde `"` olan çok satırlı commit mesajını `git commit -m` ile verme (argüman bozulur) → mesajı dosyaya yaz, `git commit -F <dosya>`.
+  `gh` tam yolu: `C:\Program Files\GitHub CLI\gh.exe`. Kullanıcı ile **aynı klasörü** paylaşıyoruz: branch değiştirirsem onun terminali de değişir — söyle.
+- **Merge kararı kullanıcınındır:** Claude PR açar, merge'ü kullanıcı (QA rolünde) yapar. Vercel deploy/log kontrolü için Vercel MCP bağlı.
 
 ## 8. Ücretsiz servis haritası (Kasım 2026'da kontrol edildi)
 
