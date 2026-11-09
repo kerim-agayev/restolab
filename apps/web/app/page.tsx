@@ -1,7 +1,9 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="mx-auto max-w-2xl p-8 space-y-4">
-      <h1 className="text-3xl font-bold">RestoLab</h1>
+      <h1 className="text-3xl font-bold">RestoLab — Restoran Paneli</h1>
       <p>Mini restoran yönetim sistemi — senior engineer olma laboratuvarı.</p>
       <p className="text-sm text-zinc-500">
         Ortam: {process.env.RELEASE_CHANNEL ?? "unknown"}
@@ -12,6 +14,9 @@ export default function Home() {
       >
         GitHub repo
       </a>
+      <Link className="block text-lg font-semibold underline" href="/tutorial">
+        📚 Tutorial — her günün interaktif dersi
+      </Link>
     </main>
   );
 }
