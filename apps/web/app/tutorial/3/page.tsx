@@ -10,7 +10,7 @@ export const metadata: Metadata = { title: "Gün 3 — HTTP: bir isteğin içind
 const journey = [
   { title: "Butona basıldı", detail: "Garson ‘Mətbəxə göndər’e bastı. React onClick fonksiyonu çalıştı ve fetch() çağırdı." },
   { title: "Request hazırlandı", detail: "Tarayıcı bir mektup yazdı: METHOD (POST) + URL (/api/orders) + HEADERS (kimim, ne format) + BODY (sipariş içeriği)." },
-  { title: "İnternette yolculuk", detail: "Mektup HTTPS ile şifrelenip sunucuya gider. (DNS, TCP, TLS detaylarını Gün 4–5’te göreceğiz.)" },
+  { title: "İnternette yolculuk", detail: "Mektup HTTPS ile şifrelenip sunucuya gider. (DNS, TCP, TLS detaylarını Gün 5–6’da göreceğiz.)" },
   { title: "Sunucu (route handler)", detail: "Vercel’deki kodumuz isteği alır, okur, iş yapar (ileride: veritabanına yazar)." },
   { title: "Log yazıldı", detail: "Sunucu bir log satırı yazar: requestId, method, status, süre. Backend/QA sorunları buradan takip eder." },
   { title: "Response döndü", detail: "Cevap mektubu: STATUS CODE (201 Created) + HEADERS + BODY (oluşan sipariş)." },

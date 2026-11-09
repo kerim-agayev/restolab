@@ -12,7 +12,7 @@ NestJS, QA terimleri, system design, DevOps…) **anlamıyor**. Amaç:
 gittiği tüm yolu A'dan Z'ye, elle yaparak öğrenmek.** Kapsam: Frontend · Backend (NestJS) · SQL & NoSQL · Cache · Kafka ·
 Real-time · Arama/Log · DevOps · QA · Observability · Security/Pentest · System Design · FDE.
 
-Süre: **90 gün, günde 1 saat** (14 modül) (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
+Süre: **91 gün, günde 1 saat** (14 modül) (iş 20:00'de bitiyor, akşam çalışıyor). Plan: [ROADMAP.md](ROADMAP.md).
 
 ### Proje: RestoLab — mini restoran yönetim sistemi (ürün ailesi)
 Clopos'a benzer olsun diye bilinçli seçildi; öğrenilen her şey işyerine doğrudan taşınır. UI çirkin olabilir.
@@ -21,10 +21,10 @@ Tam tanıtım: [docs/PRODUCT.md](docs/PRODUCT.md). Clopos gibi **aynı backend'i
 | App | Clopos karşılığı | Başlangıç |
 |---|---|---|
 | `apps/web` Admin Panel (Dashboard, Menü, Anbar, Texnoloji kart, İnventarlaşdırma, Hesabatlar, Zallar, İşçiler, QR, Ayarlar) + `/tutorial` | client | Gün 1 |
-| `apps/qr-menu` | QR menü | Gün 6 |
-| `apps/terminal` POS (PWA, offline) | Terminal | Gün 7 |
-| `apps/kds` Mutfak ekranı | KDS | Gün 52 |
-| `apps/kiosk` Self-servis | Kiosk (Subway) | Gün 54 |
+| `apps/qr-menu` | QR menü | Gün 7 |
+| `apps/terminal` POS (PWA, offline) | Terminal | Gün 8 |
+| `apps/kds` Mutfak ekranı | KDS | Gün 53 |
+| `apps/kiosk` Self-servis | Kiosk (Subway) | Gün 55 |
 | `apps/mobile` Garson + Manager (Expo) | Ofisiant app, Clopos Manager | Opsiyonel Modül 15 |
 
 Kural: her yeni özellik **minimum** yapılır (1 saatlik ders). Amaç kavramı göstermek, ürünü bitirmek değil.
@@ -136,9 +136,9 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 ```
 - `main`'e **direkt push yok** (branch protection). Her ders: `git switch -c day-XX-<konu>` → commit → `gh pr create`.
 - PR açılınca Vercel otomatik **preview URL** üretir. **QA adımı:** PR şablonundaki checklist'i kullanıcı preview'da manuel test eder;
-  67. günden itibaren Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
+  68. günden itibaren Playwright bu preview URL'ine karşı CI'da otomatik koşar. Hepsi yeşilse **squash merge**.
 - Commit mesajları: **Conventional Commits** (`feat:`, `fix:`, `chore:` …).
-- **Release kanalları** (71–72. günlerde kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
+- **Release kanalları** (72–73. günlerde kurulur): `alpha`, `beta`, `rc`, `prod` git branch'leri → her biri ayrı Vercel domain'i
   (`restolab-alpha.vercel.app` …). Promotion = bir üst branch'e merge. Restoranın kanalı control_db'de; web middleware'i restoranı
   kanalının deployment'ına yönlendirir. İnce ayar için ayrıca **feature flag**'ler.
 - **DB tarafı:** her PR'a Neon branch (preview DB); tenant migration'ları önce alpha restoranlarına, sonra kademeli uygulanır.
@@ -172,7 +172,7 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 - **Secret'lar:** `.env` asla commit edilmez. Yeni değişken → `.env.example` + [docs/TOKENS.md](docs/TOKENS.md) güncellenir.
 - **security-lab/** sadece `LAB_MODE=true` ve localhost'ta çalışır.
 - **Mimari kararlar** `docs/adr/NNN-*.md` olarak yazılır (ör. "Neden menü MongoDB'de?").
-- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (55. gün).
+- **Platform:** Windows 10 Home + PowerShell. Docker için WSL2 (56. gün).
   PowerShell'de içinde `"` olan çok satırlı commit mesajını `git commit -m` ile verme (argüman bozulur) → mesajı dosyaya yaz, `git commit -F <dosya>`.
   `gh` tam yolu: `C:\Program Files\GitHub CLI\gh.exe`. Kullanıcı ile **aynı klasörü** paylaşıyoruz: branch değiştirirsem onun terminali de değişir — söyle.
 - **Merge kararı kullanıcınındır:** Claude PR açar, merge'ü kullanıcı (QA rolünde) yapar. Vercel deploy/log kontrolü için Vercel MCP bağlı.
