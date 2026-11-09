@@ -3,7 +3,25 @@
 Her terim: **ne** + **benzetme** + **şirkette nasıl duyarsın**. Dersler ilerledikçe Claude yenilerini ekler.
 Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 
+## Git (Gün 1–2)
+- **Working directory / Staging / Commit / Push** — Değiştirdin / `git add` ile fotoğrafa dahil ettin / `git commit` ile fotoğrafı çektin (sadece senin bilgisayarında) / `git push` ile GitHub'a gönderdin.
+- **Pull / Fetch** — GitHub'daki en son kodu alıp kendi branch'ine birleştirmek / sadece indirmek, birleştirmemek.
+- **HEAD** — "Şu an üzerinde durduğun yer" (aktif branch'in son commit'i).
+- **Merge conflict** — İki kişi aynı satırı farklı değiştirdi; Git karar veremez, sen seçersin. *"Conflict çıktı, çözüyorum."*
+- **Current / Incoming change** — Çakışmada senin branch'indeki satır / içeri çektiğin (main'deki) satır.
+- **Merge vs Rebase** — main'i branch'ine katıp merge commit oluşturmak (güvenli) / commit'lerini main'in ucuna yeniden yazmak (düz geçmiş, `--force` push gerekir).
+- **Code review / Approve / Request changes** — Kodun merge'den önce incelenmesi / "onaylıyorum" / "şunları düzeltmeden merge etme".
+- **Conventional Commits** — `feat:`, `fix:`, `docs:`, `chore:`, `refactor:` ile başlayan commit mesajları.
+- **Lint (ESLint)** — Kodu çalıştırmadan okuyup hata/kötü pratik bulan araç. Otomatik code reviewer.
+
 ## Web / Frontend
+- **Request (method + URL + headers + body)** — Garsonun mutfağa verdiği fiş: ne istiyorsun + kime + üst bilgi + içerik.
+- **Method (GET / POST / PUT / PATCH / DELETE)** — Oku / oluştur / tamamen değiştir / kısmen değiştir / sil.
+- **Header** — İsteğin/cevabın üst bilgisi (`content-type`, `authorization`, `x-request-id`…).
+- **Body / Payload** — İsteğin/cevabın içeriği (genelde JSON).
+- **405 Method Not Allowed** — Bu adres bu method'u desteklemiyor.
+- **Client timeout** — Tarayıcı belli bir süre bekleyip vazgeçti; sunucu belki hâlâ çalışıyor.
+- **DevTools → Network** — Tarayıcının attığı tüm istekleri, header/body/timing ile gösteren ekran (F12).
 - **HTTP request/response** — Tarayıcının sunucuya yazdığı mektup ve gelen cevap. *"Response 500 dönüyor."*
 - **Status code** — Cevabın özeti: 2xx başarılı, 3xx yönlendirme, 4xx senin hatan (400 bozuk veri, 401 kimsin?, 403 yetkin yok, 404 yok, 429 çok istek), 5xx sunucunun hatası (500, 502 bad gateway, 503, 504 timeout).
 - **DNS** — İnternetin telefon rehberi: domain → IP.

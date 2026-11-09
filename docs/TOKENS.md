@@ -10,18 +10,18 @@
 |---|---|---|---|
 | 1 | GitHub + `gh` CLI | repo, PR, CI | Hayır |
 | 1 | Vercel | web + preview deploy | Hayır |
-| 11 | Neon | PostgreSQL (control_db + tenant DB'leri) | Hayır |
-| 14 | (kendin üret) | auth secret'ları, internal token | — |
-| 32 | Render | NestJS servis hosting | Hayır |
-| 34 | MongoDB Atlas | menü DB'si | Hayır |
-| 40 | Upstash | Redis | Hayır |
-| 43 | Resend | e-posta | Hayır |
-| 45 | Aiven | Kafka | Hayır |
-| 54 | Stripe | ödeme (test mode) | Hayır |
-| 55 | Docker Desktop | local container | Hayır |
-| 69 | Neon API key | PR başına DB branch (CI) | Hayır |
-| 75 | Sentry | hata takibi | Hayır |
-| 74 | Grafana Cloud | log/metric/trace | Hayır |
+| 12 | Neon | PostgreSQL (control_db + tenant DB'leri) | Hayır |
+| 15 | (kendin üret) | auth secret'ları, internal token | — |
+| 33 | Render | NestJS servis hosting | Hayır |
+| 35 | MongoDB Atlas | menü DB'si | Hayır |
+| 41 | Upstash | Redis | Hayır |
+| 44 | Resend | e-posta | Hayır |
+| 46 | Aiven | Kafka | Hayır |
+| 55 | Stripe | ödeme (test mode) | Hayır |
+| 56 | Docker Desktop | local container | Hayır |
+| 70 | Neon API key | PR başına DB branch (CI) | Hayır |
+| 76 | Sentry | hata takibi | Hayır |
+| 75 | Grafana Cloud | log/metric/trace | Hayır |
 
 ---
 
@@ -36,9 +36,9 @@
 ### Vercel
 1. Hesap (GitHub'a bağlı): hazır ✅ — Plan: Hobby.
 2. 1. günde: Vercel → **Add New → Project** → GitHub repo'nu seç → Root Directory: `apps/web` → Deploy.
-3. (Gün 69, CI için) Account Settings → **Tokens** → `VERCEL_TOKEN` → **GitHub Secrets**'a (`.env`'ye değil).
+3. (Gün 70, CI için) Account Settings → **Tokens** → `VERCEL_TOKEN` → **GitHub Secrets**'a (`.env`'ye değil).
 
-## Gün 11–14
+## Gün 12–15
 
 ### Neon (PostgreSQL)
 1. https://neon.tech → **Sign up with GitHub**.
@@ -47,7 +47,7 @@
 4. Dashboard → **Connect**:
    - Connection pooling **açık** → `DATABASE_URL`
    - Connection pooling **kapalı** → `DATABASE_URL_UNPOOLED`
-5. (Gün 29) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
+5. (Gün 30) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
    Aynı URL'in pooled hâlinde DB adının yerine `{db}` yaz → `TENANT_DATABASE_URL_TEMPLATE`.
 
 ### Kendi ürettiğin secret'lar
@@ -55,16 +55,16 @@ PowerShell'de her secret için bir kez çalıştır:
 ```
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
-→ `AUTH_ACCESS_TOKEN_SECRET`, `AUTH_REFRESH_TOKEN_SECRET`, (gün 22) `INTERNAL_SERVICE_TOKEN`.
+→ `AUTH_ACCESS_TOKEN_SECRET`, `AUTH_REFRESH_TOKEN_SECRET`, (gün 23) `INTERNAL_SERVICE_TOKEN`.
 
-## Gün 32
+## Gün 33
 
 ### Render
 1. https://render.com → GitHub ile giriş. Token gerekmez.
-2. 32. günde: New → Web Service → repo → Root: `services/order-service`. Env değişkenleri Render panelinden.
+2. 33. günde: New → Web Service → repo → Root: `services/order-service`. Env değişkenleri Render panelinden.
 3. Free servis 15 dk boşta kalınca uyur (ilk istek ~30 sn) — bunu bilerek inceleyeceğiz.
 
-## Gün 34–43
+## Gün 35–44
 
 ### MongoDB Atlas
 1. https://www.mongodb.com/cloud/atlas/register → GitHub/Google ile kayıt.
@@ -82,7 +82,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 1. https://resend.com/signup → **API Keys → Create** (Sending access) → `RESEND_API_KEY`
 2. Domain'in yoksa `EMAIL_FROM=onboarding@resend.dev` kalsın (sadece kendi mail adresine gönderebilir — yeterli).
 
-## Gün 45–54
+## Gün 46–55
 
 ### Aiven Kafka (Free)
 > Upstash Kafka 2025'te kapatıldı.
@@ -95,9 +95,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ### Stripe (test mode)
 1. https://dashboard.stripe.com/register → kayıt. İşletme bilgisi istemeye başlarsa geç; **Test mode** açık kalsın.
 2. Developers → **API keys** → `pk_test_…` → `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `sk_test_…` → `STRIPE_SECRET_KEY`
-3. `STRIPE_WEBHOOK_SECRET`: 54. günde Stripe CLI (`stripe listen`) ile birlikte alacağız.
+3. `STRIPE_WEBHOOK_SECRET`: 55. günde Stripe CLI (`stripe listen`) ile birlikte alacağız.
 
-## Gün 55
+## Gün 56
 
 ### Docker Desktop (Windows 10 Home)
 1. PowerShell'i **Yönetici olarak** aç → `wsl --install` → yeniden başlat.
@@ -105,14 +105,14 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 3. Kontrol: `docker run hello-world`. Elasticsearch için **en az 8 GB RAM** önerilir.
 4. Kubernetes: `winget install Kubernetes.kind` ve `winget install Kubernetes.kubectl`.
 
-## Gün 69
+## Gün 70
 
 ### Neon API key
 1. Neon Console → Account settings → **API keys → Create** → `NEON_API_KEY` (GitHub Secrets'a da ekle).
 2. Proje Settings → Project ID → `NEON_PROJECT_ID`.
    (Alternatif: Vercel Marketplace → Neon entegrasyonu her preview için otomatik DB branch açar — birlikte karşılaştıracağız.)
 
-## Gün 74–78
+## Gün 75–79
 
 ### Sentry
 1. https://sentry.io/signup → **Developer (free)** → Create Project → Next.js → DSN → `SENTRY_DSN`, `NEXT_PUBLIC_SENTRY_DSN`
