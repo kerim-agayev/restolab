@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="mx-auto max-w-2xl p-8 space-y-4">
@@ -12,6 +14,9 @@ export default function Home() {
       >
         GitHub repo
       </a>
+      <Link className="block text-lg font-semibold underline" href="/tutorial">
+        📚 Tutorial — her günün interaktif dersi
+      </Link>
     </main>
   );
 }
