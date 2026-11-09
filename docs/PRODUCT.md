@@ -12,10 +12,10 @@ kullanan bir **uygulama ailesi**. Clopos'taki gibi: admin panel, terminal, QR me
 | RestoLab | Clopos'taki karşılığı | Kim kullanır | Teknoloji | Ne zaman başlıyoruz |
 |---|---|---|---|---|
 | `apps/web` — **Admin Panel** | client (client.clopos.menu) | Restoran sahibi, müdür | Next.js | Gün 1 (şu an bu var) |
-| `apps/terminal` — **Terminal (POS)** | Terminal | Kasiyer, garson (tablet) | Next.js PWA (offline) | Gün 8 |
-| `apps/qr-menu` — **QR Menü** | QR menü | Müşteri (telefon) | Next.js (statik + cache) | Gün 7 |
-| `apps/kds` — **Mutfak Ekranı** | Kitchen display | Aşçı | Next.js + WebSocket | Gün 53 |
-| `apps/kiosk` — **Kiosk** | Kiosk (Subway gibi self-servis) | Müşteri | Next.js + Stripe | Gün 55 |
+| `apps/terminal` — **Terminal (POS)** | Terminal | Kasiyer, garson (tablet) | Next.js PWA (offline) | Gün 9 |
+| `apps/qr-menu` — **QR Menü** | QR menü | Müşteri (telefon) | Next.js (statik + cache) | Gün 8 |
+| `apps/kds` — **Mutfak Ekranı** | Kitchen display | Aşçı | Next.js + WebSocket | Gün 54 |
+| `apps/kiosk` — **Kiosk** | Kiosk (Subway gibi self-servis) | Müşteri | Next.js + Stripe | Gün 56 |
 | `apps/mobile` — **Garson + Manager mobil** | Ofisiant app, Clopos Manager | Garson, sahip | Expo (React Native) | Opsiyonel Modül 15 |
 
 Her uygulama ayrı deploy edilir (ayrı Vercel projesi, ayrı URL). Hepsi aynı monorepo'da yaşar ve ortak kodu
@@ -40,7 +40,7 @@ Her uygulama ayrı deploy edilir (ayrı Vercel projesi, ayrı URL). Hepsi aynı 
 
 - Masa planı → masa aç → ürün ekle (modifier seç) → **"Mətbəxə göndər"** (mutfağa gönder) → hesap → ödeme (nakit/kart, hesap bölme)
 - Kasa növbəsi (shift) aç/kapat
-- **İnternet kesilince çalışmaya devam et** (offline-first, Gün 87)
+- **İnternet kesilince çalışmaya devam et** (offline-first, Gün 88)
 - Öğreteceği: idempotency (çift basma), transaction (aynı masayı iki garson açması), WebSocket, offline senkronizasyon
 
 ## 4. QR Menü (`apps/qr-menu`)
