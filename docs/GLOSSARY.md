@@ -22,6 +22,15 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **405 Method Not Allowed** — Bu adres bu method'u desteklemiyor.
 - **Client timeout** — Tarayıcı belli bir süre bekleyip vazgeçti; sunucu belki hâlâ çalışıyor.
 - **DevTools → Network** — Tarayıcının attığı tüm istekleri, header/body/timing ile gösteren ekran (F12).
+- **Payload / Preview / Response** — Gönderdiğin body / cevabın biçimlendirilmiş hâli / cevabın ham hâli.
+- **Initiator** — İsteği kimin başlattığı (dosya, satır, tıklama). "Bu istek nereden geliyor?" sorusunun cevabı.
+- **Timing / TTFB** — İsteğin süresinin parçaları (DNS, bağlantı, SSL, bekleme, indirme) / Time To First Byte: sunucunun ilk byte'ı gönderene kadar geçen süre. Uzunsa genelde backend yavaştır.
+- **Preserve log / Disable cache / Throttling** — Sayfa yenilense de istekleri tut / cache'i kapat / interneti bilerek yavaşlat (Slow 4G).
+- **HAR** — Network kaydının dosya hâli; bug report'a eklenir.
+- **Keep-alive** — Aynı sunucuya açık bağlantıyı tekrar kullanmak; her istekte yeniden el sıkışmamak.
+- **curl** — Terminalden HTTP isteği atan araç. `-i` header göster, `-v` her şeyi göster, `-X` method, `-H` header, `-d` body, `--max-time` timeout. Windows PowerShell'de `curl.exe` yaz.
+- **Copy as cURL** — DevTools'ta bir isteği birebir curl komutuna çevirmek. Cookie/token içerir, paylaşmadan önce temizle.
+- **415 Unsupported Media Type** — Body'nin formatı (content-type) sunucunun beklediği değil.
 - **HTTP request/response** — Tarayıcının sunucuya yazdığı mektup ve gelen cevap. *"Response 500 dönüyor."*
 - **Status code** — Cevabın özeti: 2xx başarılı, 3xx yönlendirme, 4xx senin hatan (400 bozuk veri, 401 kimsin?, 403 yetkin yok, 404 yok, 429 çok istek), 5xx sunucunun hatası (500, 502 bad gateway, 503, 504 timeout).
 - **DNS** — İnternetin telefon rehberi: domain → IP.
