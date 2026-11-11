@@ -12,8 +12,9 @@
 | | |
 |---|---|
 | **Tamamlanan son ders** | **Gün 3** — HTTP Lab (PR #5, merge edildi) |
-| **Devam eden ders** | **Gün 4** — DevTools + curl: kod hazır, PR açıldı; kullanıcı preview QA → merge → terminal görevleri + quiz |
-| **Sonra** | **Gün 5** — Network 1 (ROADMAP satır 5): encapsulation, IP/subnet, ARP, NAT, port, TCP/UDP, handshake, port tarama simülatörü |
+| **Devam eden ders** | **Gün 4** PR #7 açık (kullanıcı merge etmedi, Gün 4 soruları cevapsız) · **Gün 5** kodu hazır: branch `day-05/network-1` (day-04 branch'inin ÜSTÜNDE — stacked). PR henüz yok |
+| **Yapılacak** | PR #7 merge olunca: `git fetch` → `git rebase --onto origin/main day-04/devtools-curl day-05/network-1` → `git push --force-with-lease` → PR #8 (base main) |
+| **Sonra** | **Gün 6** — Network 2: DNS, DHCP, ICMP (ping/tracert), TLS, sniffing simülatörü, firewall oyunu, "Enter'a bastın" final animasyonu |
 | **Açık PR** | **#6** `day-05/network-plan` — sadece doküman: network Gün 5–6, plan 92 gün + `ogrenilecekler.txt` eklemeleri (Modül 15 Derinleşme) + SESSION.md. **Kullanıcı merge etmeli** (QA rolü). |
 | **Lokal branch** | `day-05/network-plan` |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
@@ -44,6 +45,7 @@
 | 2026-11-11 | Durum analizi yapıldı, SESSION.md + CLAUDE.md §3 kuralı eklendi | Sıradaki: PR #6 merge → Gün 4 |
 | 2026-11-11 | PR #6 merge ✅. Gün 3 quiz: requestId ✅, 405 + timeout → tekrar edilecek (Gün 4 sayfasının 1. bölümü) | |
 | 2026-11-11 | Gün 4 kodu: branch `day-04/devtools-curl`, `/tutorial/4` (TimeoutRace, NetworkPanel, CurlBuilder), route.ts'e 415. Lint/tsc/build/local test ✅ | **PR #7** açıldı, preview READY + `/tutorial/4` 200 (Vercel MCP ile doğrulandı) → kullanıcı QA + merge + görevler |
+| 2026-11-11 | Kullanıcı Gün 4 sorularını cevaplamadan Gün 5'e geçmek istedi. Gün 5 kodu (7 bileşen + sayfa) yazıldı; lint/tsc/build/local 200 ✅. Branch push edildi (preview) | PR #7 merge bekleniyor → sonra rebase + PR #8 |
 | 2026-11-11 | `ogrenilecekler.txt` işlendi → ROADMAP: Gün 11'e Redux, Gün 76'ya Prometheus, "Claude Code cümleleri" tablosu, okuma eşlikçisi, **Modül 15 Derinleşme (Gün 93–97)**, mobil → Modül 16 (98–102). PR #6'ya eklendi | ana plan 92 gün aynı; kullanıcı PR #6'yı merge edecek |
 
 ---
