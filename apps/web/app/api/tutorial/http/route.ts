@@ -20,6 +20,8 @@ const STATUS_TEXT: Record<number, { text: string; tr: string }> = {
   401: { text: "Unauthorized", tr: "Kim olduğunu bilmiyorum: giriş yapmamışsın veya token süresi dolmuş." },
   403: { text: "Forbidden", tr: "Kim olduğunu biliyorum ama buna YETKİN yok (ör. garson rapor sayfasına girmeye çalışıyor)." },
   404: { text: "Not Found", tr: "İstediğin kaynak yok (ör. olmayan masa numarası)." },
+  405: { text: "Method Not Allowed", tr: "Bu adres bu method'u kabul etmiyor (ör. PATCH desteklenmiyor)." },
+  415: { text: "Unsupported Media Type", tr: "Body'nin formatını söylemedin veya desteklemiyorum: content-type: application/json bekliyordum." },
   409: { text: "Conflict", tr: "Mevcut durumla çakışıyor (ör. masa zaten başka garson tarafından açılmış)." },
   422: { text: "Unprocessable Content", tr: "Format doğru ama içerik kurala uymuyor (ör. adet = -3)." },
   429: { text: "Too Many Requests", tr: "Çok hızlı/çok fazla istek attın. Rate limit'e takıldın, biraz bekle." },
@@ -64,6 +66,20 @@ async function handle(request: Request): Promise<Response> {
   let receivedBody: unknown = null;
   if (request.method === "POST" || request.method === "PUT") {
     const raw = await request.text();
+    const contentType = request.headers.get("content-type") ?? "";
+    if (raw && !contentType.includes("application/json")) {
+      log("warn", { status: 415, note: `yanlış content-type: ${contentType || "(yok)"}` });
+      return Response.json(
+        {
+          requestId,
+          error: "Unsupported Media Type",
+          aciklama: STATUS_TEXT[415].tr,
+          receivedContentType: contentType || null,
+          hint: "curl'de -H \"content-type: application/json\" ekle.",
+        },
+        { status: 415, headers: { "x-request-id": requestId, "cache-control": "no-store" } },
+      );
+    }
     try {
       receivedBody = raw ? JSON.parse(raw) : null;
     } catch {
