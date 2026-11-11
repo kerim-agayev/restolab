@@ -16,7 +16,7 @@ kullanan bir **uygulama ailesi**. Clopos'taki gibi: admin panel, terminal, QR me
 | `apps/qr-menu` — **QR Menü** | QR menü | Müşteri (telefon) | Next.js (statik + cache) | Gün 8 |
 | `apps/kds` — **Mutfak Ekranı** | Kitchen display | Aşçı | Next.js + WebSocket | Gün 54 |
 | `apps/kiosk` — **Kiosk** | Kiosk (Subway gibi self-servis) | Müşteri | Next.js + Stripe | Gün 56 |
-| `apps/mobile` — **Garson + Manager mobil** | Ofisiant app, Clopos Manager | Garson, sahip | Expo (React Native) | Opsiyonel Modül 15 |
+| `apps/mobile` — **Garson + Manager mobil** | Ofisiant app, Clopos Manager | Garson, sahip | Expo (React Native) | Opsiyonel Modül 16 |
 
 Her uygulama ayrı deploy edilir (ayrı Vercel projesi, ayrı URL). Hepsi aynı monorepo'da yaşar ve ortak kodu
 `packages/` altından paylaşır (tipler, API client, para/saat yardımcıları, UI parçaları).

@@ -25,7 +25,7 @@ Tam tanıtım: [docs/PRODUCT.md](docs/PRODUCT.md). Clopos gibi **aynı backend'i
 | `apps/terminal` POS (PWA, offline) | Terminal | Gün 9 |
 | `apps/kds` Mutfak ekranı | KDS | Gün 54 |
 | `apps/kiosk` Self-servis | Kiosk (Subway) | Gün 56 |
-| `apps/mobile` Garson + Manager (Expo) | Ofisiant app, Clopos Manager | Opsiyonel Modül 15 |
+| `apps/mobile` Garson + Manager (Expo) | Ofisiant app, Clopos Manager | Opsiyonel Modül 16 |
 
 Kural: her yeni özellik **minimum** yapılır (1 saatlik ders). Amaç kavramı göstermek, ürünü bitirmek değil.
 Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric, ofisiant, inventarlaşdırma, zal) — kod/UI'da da bunları kullanabilirsin.
@@ -65,6 +65,9 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
 
 ## 3. Oturum başlangıç protokolü
 
+0. **[docs/SESSION.md](docs/SESSION.md)'yi oku** → adım adım "nerede kaldık" + sıradaki yapılacaklar listesi.
+   Her önemli adımdan sonra (branch/PR/ders bitişi/takılma) SESSION.md'nin "Adım günlüğü" ve "Şu an" bölümünü **hemen** güncelle —
+   oturum kaybolsa bile kaldığımız yer buradan bulunur.
 1. [docs/PROGRESS.md](docs/PROGRESS.md)'yi oku → kaçıncı gün, en son nerede zorlandı?
 2. [ROADMAP.md](ROADMAP.md)'den o günün dersini bul.
 3. Gerekli token var mı (`.env`)? Eksikse [docs/TOKENS.md](docs/TOKENS.md)'deki adımı birlikte yap.
@@ -157,7 +160,10 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
   `TutorialShell` + `Section` + `Note`. Lab endpoint'leri: `app/api/tutorial/<konu>/route.ts`.
 - JSX metninde düz `'` kullanma (lint: `react/no-unescaped-entities`) → `’` kullan.
 - Her sayfada: (a) **animasyonlu akış diyagramı** (istek kutudan kutuya yanar), (b) **drag & drop alıştırma** (adımları sıraya diz),
-  (c) **"Kır" butonları** (bilinçli hata), (d) **canlı log paneli** (requestId ile), (e) 3 soruluk quiz.
+  (c) **"Kır" butonları** (bilinçli hata), (d) **canlı log paneli** (requestId ile), (e) 3 soruluk quiz,
+  (f) ilgiliyse **"Claude Code bunu söylerse ne demek?"** kutusu (`<Note icon="🤖">`) — kullanıcının asıl hedefi Claude Code'un ve
+  developer'ların cümlelerini anlamak (bkz. ROADMAP "Claude Code bana şunu dedi" tablosu). İlgili kitap bölümü varsa (DDIA, Database
+  Internals) dersin sonunda "📖 Okumak istersen" notu.
 - Kütüphaneler: `@dnd-kit/core`, `motion`. CSS önemsiz — sade Tailwind.
 - "Kır" butonları zararsız olmalı: sadece kendi isteğini bozar, veriyi bozmaz.
 

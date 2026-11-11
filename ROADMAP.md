@@ -40,7 +40,7 @@ mutfak ekranı, ödeme, Z raporu, menü arama.
 | 8 | Next.js render: Server/Client Component, SSR/SSG/CSR, hydration | Menü sayfası 3 render türüyle | Hydration error; build-time vs runtime env |
 | 9 | Form → Server Action / Route Handler, zod validation | "Masa aç" formu | 400 vs 422 |
 | 10 | **Para neden float olmaz**, timezone (UTC), i18n'e giriş | Adisyon toplamı, restoran saati | 0.1 + 0.2 ≠ 0.3; gece yarısı tarih kayması |
-| 11 | Tarayıcı state: cookie, localStorage; TanStack Query, optimistic UI; Core Web Vitals | Sipariş sepeti | localStorage'da fiyatı değiştir → neden server'a güvenmeli |
+| 11 | Tarayıcı state: cookie, localStorage; **server state vs client state**: TanStack Query vs **Redux (Toolkit)** vs Zustand — hangisi nerede?; optimistic UI; Core Web Vitals | Sipariş sepeti | localStorage'da fiyatı değiştir → neden server'a güvenmeli |
 | 12 | Tekrar + quiz | `/tutorial` ana sayfası + Modül 1 haritası | — |
 
 ## Modül 2 — SQL Database + Auth (Gün 13–23)
@@ -158,7 +158,7 @@ mutfak ekranı, ödeme, Z raporu, menü arama.
 
 | Gün | Konu | Yapacağımız | Bilinçli kıracağımız |
 |---|---|---|---|
-| 76 | Logs / metrics / traces, **OpenTelemetry** → Grafana Cloud | Bir siparişin tüm servislerdeki trace'i | Yavaş span'i bul |
+| 76 | Logs / metrics / traces, **OpenTelemetry**; **Prometheus** (metric türleri: counter/gauge/histogram, PromQL'e giriş) → **Grafana** dashboard | Bir siparişin tüm servislerdeki trace'i; "dakikada sipariş" grafiği | Yavaş span'i bul |
 | 77 | **Sentry**: tenant + release tag'leri, source map | Frontend + backend hataları | Hangi kanal/restoran etkilendi? |
 | 78 | Dashboard, alert, **SLI / SLO / SLA** | Hata oranı alarmı | Alarm gürültüsü (alert fatigue) |
 | 79 | **Incident** tatbikatı + **postmortem** | "Mutfak ekranı sipariş almıyor!" | Gerçekçi arıza |
@@ -212,15 +212,59 @@ mutfak ekranı, ödeme, Z raporu, menü arama.
 | Restoran ayarları: timezone, release kanalı | 10, 73–74 |
 | Terminal offline | 88 |
 
-## Opsiyonel Modül 15 — Mobil (Gün 93–97)
+## "Claude Code bana şunu dedi" — hangi günde öğreniyorsun?
+
+Claude Code (veya bir developer) aşağıdaki cümleleri kurduğunda ne demek istediğini bu günlerde **elle yaparak** öğreneceksin.
+Her derste bir **"Claude Code bunu söylerse ne demek?"** kutusu var.
+
+| Cümle | Gün |
+|---|---|
+| "Bu tabloya **index** ekledim." | 19 |
+| "Bu işlemi **transaction** içerisine aldım." | 21 |
+| "**N+1 query** problemini çözdüm." | 22 |
+| "Database **migration** oluşturdum." | 15, 33 |
+| "**Cache katmanı** ekledim." | 41–43 |
+| "API endpoint'ini **optimize** ettim." | 19 (index), 22 (N+1), 27 (pagination), 42 (cache), 70 (k6 ile ölçmek) |
+| "**Race condition** problemini giderdim." | 21–22, 44 (distributed lock) |
+| "Database **connection pool** yapılandırmasını değiştirdim." | 22, 32 |
+
+## Okuma eşlikçisi (kitaplar)
+
+İstersen dersle aynı hafta ilgili bölümü oku — ders "ne"yi ve "nasıl"ı gösterir, kitap "neden"i derinleştirir.
+
+| Kitap → konu | İlgili günler |
+|---|---|
+| **Designing Data-Intensive Applications** (Kleppmann, Riccomini — 2. baskı) | |
+| Veri modelleri ve sorgu dilleri (ilişkisel vs doküman) | 14, 36 |
+| Storage & retrieval (B-Tree, LSM-Tree, index) | 19, 95 |
+| Encoding & şema evrimi | 15, 33, 48 |
+| Transactions (isolation, race condition) | 21–22, 39 |
+| Replication / Partitioning | 23, 85, 96 |
+| Dağıtık sistemlerin sorunları, consistency & consensus | 85, 97 |
+| Stream processing (event-driven) | 47–53 |
+| **Database Internals** (Petrov) — ikinci aşama | |
+| Part I: storage engine, B-Tree, LSM-Tree, page, WAL | 19, 95 |
+| Part II: replication, consensus, dağıtık mimari | 96–97 |
+
+## Modül 15 — Derinleşme (Gün 93–97, 92 günden sonra)
+
+| Gün | Konu | Yapacağımız |
+|---|---|---|
+| 93 | **Debugging derin**: VS Code debugger (breakpoint, step over/into, watch, call stack), `node --inspect` ile NestJS, Chrome Sources sekmesi, source map, React DevTools | Bilinçli bug'ı log yerine breakpoint ile bul; sadece production'da olan bug → source map |
+| 94 | **Redux Toolkit** uygulamalı: store, slice, action/reducer, selector; RTK Query vs TanStack Query; Redux DevTools (time travel) | Adisyonu Redux ile yeniden yaz, iki yaklaşımı karşılaştır |
+| 95 | **Storage engine'ler**: B-Tree vs LSM-Tree, page, WAL, VACUUM (Database Internals Part I) | Postgres'in içine bak (`EXPLAIN (ANALYZE, BUFFERS)`, page/WAL kavramı) |
+| 96 | **Replication & partitioning** uygulamalı (DDIA) | Docker'da Postgres primary + replica, replication lag'i gör; sharding simülasyonu |
+| 97 | **Dağıtık sistemler**: saat problemleri, leader election, consensus (Raft), "exactly-once" yanılgısı | Raft simülatörü (`/tutorial/97`) |
+
+## Opsiyonel Modül 16 — Mobil (Gün 98–102)
 
 | Gün | Konu |
 |---|---|
-| 93 | React Native vs web; Expo kurulumu; telefonda Expo Go ile çalıştırma |
-| 94 | Garson modu: aynı order-service API'sini mobilden kullanmak; token'ı güvenli saklama |
-| 95 | Manager modu: canlı ciro, push notification |
-| 96 | Mobilde offline, kötü ağ koşulları |
-| 97 | Build & dağıtım (EAS), app store süreci kavramı |
+| 98 | React Native vs web; Expo kurulumu; telefonda Expo Go ile çalıştırma |
+| 99 | Garson modu: aynı order-service API'sini mobilden kullanmak; token'ı güvenli saklama |
+| 100 | Manager modu: canlı ciro, push notification |
+| 101 | Mobilde offline, kötü ağ koşulları |
+| 102 | Build & dağıtım (EAS), app store süreci kavramı |
 
 ## Bonus modüller
 
