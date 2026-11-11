@@ -54,6 +54,8 @@
 | System Design | Modül 13 (Gün 85–89) |
 | Prometheus, Grafana, Kibana | Modül 11 (Gün 76–79) + Kibana Modül 7 |
 | Testler (backend, frontend) | Modül 9 (Gün 66–70) |
-| Redux | ❗ Planda yok (TanStack Query var, Gün 11). Gün 11'de "Redux vs TanStack Query vs Zustand" karşılaştırması eklenebilir |
-| Claude Code'un söylediği cümleleri anlamak: index, transaction, N+1, migration, cache katmanı, endpoint optimizasyonu, race condition, connection pool | Modül 2 (index, transaction, migration, pool), Modül 3 (N+1, endpoint), Modül 5 (cache), Modül 2/6 (race condition). Her derste "Claude Code bunu söylerse ne demek?" kutusu koy |
-| Kitaplar: *Designing Data-Intensive Applications* (Kleppmann, 2. baskı), *Database Internals* (Petrov) | Modül 2–4 ve 13'te ilgili bölüm önerisi ver (ör. DDIA Ch.7 Transactions → Gün 13+) |
+| Redux | ✅ Gün 11'e "TanStack Query vs Redux Toolkit vs Zustand" eklendi + **Gün 94** Redux Toolkit uygulamalı |
+| Debugging | ✅ **Gün 93** Debugging derin (VS Code debugger, breakpoint, node --inspect, source map, React DevTools) |
+| Prometheus | ✅ Gün 76'ya açıkça eklendi (counter/gauge/histogram, PromQL) |
+| Claude Code'un söylediği cümleleri anlamak: index, transaction, N+1, migration, cache katmanı, endpoint optimizasyonu, race condition, connection pool | ✅ ROADMAP'e "Claude Code bana şunu dedi" tablosu (cümle → gün). CLAUDE.md §6: her derste 🤖 kutusu |
+| Kitaplar: *Designing Data-Intensive Applications* (Kleppmann, 2. baskı), *Database Internals* (Petrov) | ✅ ROADMAP "Okuma eşlikçisi" (konu → gün) + **Gün 95–97** (storage engine, replication/partitioning, dağıtık sistemler) |
