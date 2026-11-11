@@ -11,24 +11,18 @@
 
 | | |
 |---|---|
-| **Tamamlanan son ders** | **Gün 3** — HTTP Lab (PR #5, merge edildi) |
-| **Devam eden ders** | **Gün 4** PR #7 açık (kullanıcı merge etmedi, Gün 4 soruları cevapsız) · **Gün 5** kodu hazır: branch `day-05/network-1` (day-04 branch'inin ÜSTÜNDE — stacked). PR henüz yok |
-| **Yapılacak** | PR #7 merge olunca: `git fetch` → `git rebase --onto origin/main day-04/devtools-curl day-05/network-1` → `git push --force-with-lease` → PR #8 (base main) |
+| **Tamamlanan son ders** | **Gün 4** — DevTools + curl (PR #7, merge edildi 2026-11-11) |
+| **Devam eden ders** | **Gün 5** — Network 1: branch `day-05/network-1` main'in üstüne rebase edildi → **PR #8** açık. Kullanıcı preview'da QA + terminal görevleri + merge |
+| **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
 | **Sonra** | **Gün 6** — Network 2: DNS, DHCP, ICMP (ping/tracert), TLS, sniffing simülatörü, firewall oyunu, "Enter'a bastın" final animasyonu |
-| **Açık PR** | **#6** `day-05/network-plan` — sadece doküman: network Gün 5–6, plan 92 gün + `ogrenilecekler.txt` eklemeleri (Modül 15 Derinleşme) + SESSION.md. **Kullanıcı merge etmeli** (QA rolü). |
-| **Lokal branch** | `day-05/network-plan` |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
 | **Canlı** | https://restolab-kappa.vercel.app · repo: https://github.com/kerim-agayev/restolab |
 
 ### Bir sonraki oturumda sırayla yapılacaklar
-1. [ ] Kullanıcı PR #6'yı GitHub'da kontrol edip **Squash and merge** yapsın (sadece docs, preview testi gerekmez).
-2. [ ] `git switch main` → `git pull` (⚠️ kullanıcının terminali de main'e geçer — söyle).
-3. [ ] Gün 3 tekrarı (2 cümle + 3 soru). Odak: **client timeout ≠ server error** (Vercel log: `status 200, durationMs 5001`, tarayıcıda TIMEOUT).
-4. [ ] `git switch -c day-04/devtools-curl`
-5. [ ] Gün 4 dersi (ROADMAP Modül 1, satır "4"): DevTools Network sekmeleri (Headers, Payload, Preview vs Response, Initiator,
-       Timing, Cookies, filtre, Preserve log, Disable cache, Slow 4G, HAR) + curl (`-i -v -X -H -d --max-time`, Copy as cURL) + QA bug report'a curl.
-6. [ ] `/tutorial/4` sayfası + `lessons.ts`'e ekle → PR → preview → kullanıcı QA → merge.
-7. [ ] Ders sonu: PROGRESS.md satırı, GLOSSARY.md yeni terimler, **bu dosyayı güncelle**.
+1. [ ] Kullanıcı PR #8'i (Gün 5) preview'da test edip **Squash and merge** yapsın.
+2. [ ] Cevapları değerlendir → PROGRESS.md Gün 4 + Gün 5 "zorlandığı" sütunu.
+3. [ ] `git switch main` → `git pull` → `git switch -c day-06/network-2` (⚠️ kullanıcının terminali de değişir — söyle).
+4. [ ] Gün 6 dersi + `/tutorial/6` + lessons.ts → PR → preview → merge. Ders sonu: PROGRESS, GLOSSARY, bu dosya.
 
 ---
 
@@ -47,6 +41,7 @@
 | 2026-11-11 | Gün 4 kodu: branch `day-04/devtools-curl`, `/tutorial/4` (TimeoutRace, NetworkPanel, CurlBuilder), route.ts'e 415. Lint/tsc/build/local test ✅ | **PR #7** açıldı, preview READY + `/tutorial/4` 200 (Vercel MCP ile doğrulandı) → kullanıcı QA + merge + görevler |
 | 2026-11-11 | Kullanıcı Gün 4 sorularını cevaplamadan Gün 5'e geçmek istedi. Gün 5 kodu (7 bileşen + sayfa) yazıldı; lint/tsc/build/local 200 ✅. Branch push edildi (preview) | PR #7 merge bekleniyor → sonra rebase + PR #8 |
 | 2026-11-11 | `ogrenilecekler.txt` işlendi → ROADMAP: Gün 11'e Redux, Gün 76'ya Prometheus, "Claude Code cümleleri" tablosu, okuma eşlikçisi, **Modül 15 Derinleşme (Gün 93–97)**, mobil → Modül 16 (98–102). PR #6'ya eklendi | ana plan 92 gün aynı; kullanıcı PR #6'yı merge edecek |
+| 2026-11-11 | PR #7 merge ✅ (kullanıcı). `day-05/network-1` → `git rebase --onto origin/main day-04/devtools-curl` (stacked branch'in gerçek kullanımı), force-with-lease push, **PR #8** açıldı | QA + merge bekleniyor |
 
 ---
 
