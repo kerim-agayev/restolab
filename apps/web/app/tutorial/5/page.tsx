@@ -107,6 +107,13 @@ function TaskList({ items }: { items: typeof tasks }) {
 export default function Day5() {
   return (
     <TutorialShell day={5}>
+      <Note icon="🧒">
+        <p>
+          <b>Bu sayfa zor geldiyse:</b> önce <a href="/tutorial/5/kolay" className="font-semibold underline">sade anlatım versiyonunu</a> yap
+          (benzetmelerle, kendi cümlelerinle anlatarak). Sonra buraya dön; aynı konular, bu kez teknik adlarıyla.
+        </p>
+      </Note>
+
       <Section n={1} title="Büyük resim: laptop’tan Vercel’e">
         <p className="text-sm">Gün 3’te HTTP mesajını gördük. Ama o mesaj Frankfurt’taki sunucuya NASIL ulaşıyor? ▶ Oynat.</p>
         <FlowPlayer steps={journey} />
