@@ -21,6 +21,8 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 
 ## Kullanıcı hakkında notlar
 - Clopos'ta frontend; MSSQL'de junior seviye SELECT / window function biliyor.
+- Udemy'de ethical hacking / pentest kursu aldı → network ve güvenlik derslerinde o kursa köprü kur.
+- Network'ü "anlamadığım ama çok önemli" diye işaretledi → Gün 5–6'ya bölündü (plan 92 gün), mükemmel interaktif UI istiyor.
 - **Anlatım tercihi:** Adım adım, her adımda tam buton/menü adı, beklenen ekran çıktısı. Bir seferde tek iş. Restoran benzetmeleri iyi çalışıyor.
   Her dersin sonunda "UI'da ne görmelisin" bölümü olsun.
 - Hesaplar: GitHub ✅, Vercel ✅ (proje: restolab, root: `apps/web`, env: `RELEASE_CHANNEL` prod/preview).
