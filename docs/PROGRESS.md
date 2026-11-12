@@ -17,6 +17,8 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 | 5b | 2026-11-12 | Gün 5 **sade anlatım** (`/tutorial/5/kolay`, Feynman): kullanıcı "zor, ben ekonomi okudum, ezber istemiyorum" dedi → 6 bölüm hikâye+dokun+tahmin+sen anlat+terim; kalıcı kural CLAUDE.md #13 | — | Teknik Gün 5 ağır geldi; sade versiyon onaylandı ("evet kullanalım") |
 | 6 | 2026-11-12 | Network 2 — `/tutorial/6` (sade, Feynman) + `/tutorial/6/teknik`: DNS zinciri + kayıtlar/TTL, DHCP-DORA, ping/traceroute (TTL), TLS sertifika kontrolü, dinleme simülasyonu (sahte veri), firewall oyunu, "Enter'a bastın" uçtan uca; 8 gerçek + 5 "kır" terminal görevi (.invalid, badssl) | DNS, resolver, TTL, A/CNAME/MX/TXT/NS, DHCP, lease, ICMP, traceroute, hop, TLS, CA, sertifika, sniffing, firewall, 0.0.0.0/0, least privilege | (kullanıcı çalıştıktan sonra doldurulacak) |
 
+| 7 | 2026-11-12 | HTTPS/HSTS, CDN/edge cache, CORS — `/tutorial/7` (sade) + `/tutorial/7/teknik`; gerçek cache lab'ı (`/api/tutorial/cache`, x-vercel-cache MISS→HIT), gerçek CORS denemesi (github vs iana), hata teşhis oyunu (6 belirti → katman) | HSTS, redirect, edge, origin, HIT/MISS, purge, Cache-Control, s-maxage, age, origin (CORS), preflight | (kullanıcı çalıştıktan sonra doldurulacak) |
+
 ## Gün 1'de yaşanan gerçek bug (Gün 2 başında 1 dk tekrar)
 "Ortam: unknown" → (1) Turbo strict env modu değişkeni gizledi → `turbo.json` `env` listesi; (2) Vercel env ilk eklemede 3 ortama birden uygulandı;
 (3) env build anında gömülür → değişince redeploy; (4) boş commit "Skipped - Not affected" (affected builds).

@@ -36,6 +36,11 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **DNS** — İnternetin telefon rehberi: domain → IP.
 - **CDN** — Dosyaların dünyanın her yerine dağıtılmış kopyaları; sana en yakın depodan gelir.
 - **CORS** — Tarayıcının "başka siteden bu API'yi çağırmana izin var mı?" kontrolü.
+- **Origin / same-origin** — Site kimliği: şema + alan adı + port. Üçü aynıysa "aynı origin" (CORS gerekmez).
+- **CORS hatası / preflight (OPTIONS)** — Engelleyen **tarayıcıdır**, sunucu isteği işlemiş olabilir; çözüm sunucuda `Access-Control-Allow-Origin`. Riskli isteklerde tarayıcı önce OPTIONS ile "izin var mı?" diye sorar. curl'de CORS yoktur.
+- **HSTS / redirect (301/308) / mixed content** — Tarayıcıya "bu siteye hep https ile gel" notu / "başka adrese git" cevabı / https sayfada http kaynak yüklemek.
+- **Edge / Origin / HIT / MISS / purge** — CDN'in bölgesel deposu / asıl sunucu / depoda vardı / yoktu / depoyu boşaltmak. Vercel'de `x-vercel-cache`.
+- **Cache-Control (no-store, private, public, max-age, s-maxage, stale-while-revalidate, immutable) / age** — Cevabın nasıl saklanacağı notu (tarayıcı için `max-age`, CDN için `s-maxage`) / kopyanın depodaki yaşı.
 - **SSR / CSR / SSG** — Sayfa HTML'i sunucuda mı, tarayıcıda mı, build sırasında mı üretiliyor.
 - **Hydration** — Sunucudan gelen "ölü" HTML'e React'in can vermesi (event'leri bağlaması).
 - **BFF (Backend for Frontend)** — Frontend'e özel küçük backend katmanı; diğer servisleri toplayıp tek cevap verir.
