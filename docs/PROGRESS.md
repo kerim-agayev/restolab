@@ -14,6 +14,9 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 
 | 5 | 2026-11-11 | Network 1 — `/tutorial/5`: yolculuk animasyonu, LayerStack (encapsulation + pentest katmanları), IP/subnet hesaplayıcı (bit görünümü), ARP + ARP spoofing/MITM simülatörü, NAT tablosu, port eşleştirme, TCP handshake/UDP + paket kaybı, nmap port tarama simülatörü (-sS/-sT), 4 gerçek + 6 "kır" terminal görevi (EADDRINUSE, refused vs timeout). Kullanıcının ağı: 192.168.0.103/24, gw 192.168.0.1 | OSI/TCP-IP, encapsulation, private/public IP, CIDR, MAC, ARP, MITM, NAT, port/socket, bind, EADDRINUSE, TCP/UDP, handshake, retransmission, open/closed/filtered | Gün 4 soruları cevaplanmadı (timeout, 405, Timing) → Gün 5 sonunda tekrar sor |
 
+| 5b | 2026-11-12 | Gün 5 **sade anlatım** (`/tutorial/5/kolay`, Feynman): kullanıcı "zor, ben ekonomi okudum, ezber istemiyorum" dedi → 6 bölüm hikâye+dokun+tahmin+sen anlat+terim; kalıcı kural CLAUDE.md #13 | — | Teknik Gün 5 ağır geldi; sade versiyon onaylandı ("evet kullanalım") |
+| 6 | 2026-11-12 | Network 2 — `/tutorial/6` (sade, Feynman) + `/tutorial/6/teknik`: DNS zinciri + kayıtlar/TTL, DHCP-DORA, ping/traceroute (TTL), TLS sertifika kontrolü, dinleme simülasyonu (sahte veri), firewall oyunu, "Enter'a bastın" uçtan uca; 8 gerçek + 5 "kır" terminal görevi (.invalid, badssl) | DNS, resolver, TTL, A/CNAME/MX/TXT/NS, DHCP, lease, ICMP, traceroute, hop, TLS, CA, sertifika, sniffing, firewall, 0.0.0.0/0, least privilege | (kullanıcı çalıştıktan sonra doldurulacak) |
+
 ## Gün 1'de yaşanan gerçek bug (Gün 2 başında 1 dk tekrar)
 "Ortam: unknown" → (1) Turbo strict env modu değişkeni gizledi → `turbo.json` `env` listesi; (2) Vercel env ilk eklemede 3 ortama birden uygulandı;
 (3) env build anında gömülür → değişince redeploy; (4) boş commit "Skipped - Not affected" (affected builds).
@@ -27,6 +30,7 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 - Clopos'ta frontend; MSSQL'de junior seviye SELECT / window function biliyor.
 - Udemy'de ethical hacking / pentest kursu aldı → network ve güvenlik derslerinde o kursa köprü kur.
 - Network'ü "anlamadığım ama çok önemli" diye işaretledi → Gün 5–6'ya bölündü (plan 92 gün), mükemmel interaktif UI istiyor.
+- **Ekonomi okudu (IT geçmişi yok), ezber sevmiyor → Feynman tekniği (CLAUDE.md #13).** Benzetmelerde ekonomi kavramları (arama maliyeti, tedarik zinciri, asimetrik bilgi, takas) işe yarıyor.
 - **Anlatım tercihi:** Adım adım, her adımda tam buton/menü adı, beklenen ekran çıktısı. Bir seferde tek iş. Restoran benzetmeleri iyi çalışıyor.
   Her dersin sonunda "UI'da ne görmelisin" bölümü olsun.
 - Hesaplar: GitHub ✅, Vercel ✅ (proje: restolab, root: `apps/web`, env: `RELEASE_CHANNEL` prod/preview).

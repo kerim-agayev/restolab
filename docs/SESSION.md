@@ -7,12 +7,12 @@
 
 ---
 
-## Şu an (son güncelleme: 2026-11-11)
+## Şu an (son güncelleme: 2026-11-12)
 
 | | |
 |---|---|
 | **Tamamlanan son ders** | **Gün 4** — DevTools + curl (PR #7, merge edildi 2026-11-11) |
-| **Devam eden ders** | **Gün 5** — Network 1: branch `day-05/network-1` main'in üstüne rebase edildi → **PR #8** açık. Kullanıcı preview'da QA + terminal görevleri + merge |
+| **Devam eden ders** | **Gün 5** PR #8 (açık, merge bekliyor; teknik + `/kolay` sade sayfa) · **Gün 6** PR #9 (branch `day-06/network-2`, #8'in üstünde stacked) · **Gün 7** sırada (`day-07/https-cdn-cors`, #9'un üstünde) |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
 | **Sonra** | **Gün 6** — Network 2: DNS, DHCP, ICMP (ping/tracert), TLS, sniffing simülatörü, firewall oyunu, "Enter'a bastın" final animasyonu |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
@@ -42,6 +42,7 @@
 | 2026-11-11 | Kullanıcı Gün 4 sorularını cevaplamadan Gün 5'e geçmek istedi. Gün 5 kodu (7 bileşen + sayfa) yazıldı; lint/tsc/build/local 200 ✅. Branch push edildi (preview) | PR #7 merge bekleniyor → sonra rebase + PR #8 |
 | 2026-11-11 | `ogrenilecekler.txt` işlendi → ROADMAP: Gün 11'e Redux, Gün 76'ya Prometheus, "Claude Code cümleleri" tablosu, okuma eşlikçisi, **Modül 15 Derinleşme (Gün 93–97)**, mobil → Modül 16 (98–102). PR #6'ya eklendi | ana plan 92 gün aynı; kullanıcı PR #6'yı merge edecek |
 | 2026-11-11 | PR #7 merge ✅ (kullanıcı). `day-05/network-1` → `git rebase --onto origin/main day-04/devtools-curl` (stacked branch'in gerçek kullanımı), force-with-lease push, **PR #8** açıldı | QA + merge bekleniyor |
+| 2026-11-12 | Kullanıcı: Gün 5 zor, ekonomi okudu, ezber istemiyor → Feynman. `/tutorial/5/kolay` eklendi (PR #8'e). **CLAUDE.md kural #13**: her ders önce sade (Feynman), sonra `/teknik`. Gün 6 yapıldı: `/tutorial/6` + `/tutorial/6/teknik`, PR #9 (stacked). Kullanıcı Gün 6+7'yi bugün istedi | #8 merge → #9 rebase `git rebase --onto origin/main day-05/network-1 day-06/network-2` |
 
 ---
 
