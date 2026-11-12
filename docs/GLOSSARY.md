@@ -58,6 +58,15 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **Retransmission** — TCP'nin kaybolan paketi fark edip tekrar göndermesi.
 - **Port tarama (nmap) — open / closed / filtered** — SYN-ACK geldi / RST geldi / hiç cevap yok (firewall). `-sS` yarı açık, `-sT` tam bağlantı.
 - **Connection refused (exit 7) vs timeout (exit 28)** — Makine cevap verdi ama o portta kimse yok / hiç cevap gelmedi.
+- **DNS / Resolver / Authoritative** — İnternetin telefon rehberi (isim → IP) / senin adına zinciri dolaşan görevli / bilginin asıl sahibi sunucu. Zincir: cache → resolver → root → TLD → authoritative.
+- **DNS kayıtları (A, AAAA, CNAME, MX, TXT, NS)** — İsim→IPv4 / IPv6 / takma ad / e-posta yönlendirme / serbest not (SPF vb.) / asıl rehber kim.
+- **TTL (DNS)** — Kaydın raf ömrü (saniye). Kısa = taze ama çok sorgu; uzun = ucuz ama bayat bilgi riski. Taşımadan önce düşürülür.
+- **DHCP / DORA / lease** — Otomatik IP dağıtımı: Discover, Offer, Request, Acknowledge. Lease = adresin kira süresi. Çakışma = iki cihaza aynı IP.
+- **ICMP / ping / traceroute / TTL (paket) / hop** — Ağın durum mesajları / "orada mısın?" / ömrü 1,2,3… artırarak yolu çıkarmak / her router'da azalan ömür sayacı / bir router durağı.
+- **Latency / RTT** — Gidiş-dönüş süresi (ms).
+- **TLS / HTTPS / sertifika / CA** — Kimlik doğrulama + şifreli konuşma / HTTP'nin TLS ile sarılmış hâli / sitenin kimlik kartı (isim, tarih, imza) / kartı onaylayan güvenilir noter.
+- **Sniffing / plaintext** — Ağ trafiğini dinlemek / şifresiz düz metin (http'de şifre okunur, https'te okunmaz).
+- **Firewall / security group / 0.0.0.0/0 / least privilege** — Kapı güvenlik listesi / bulutta aynısı / "tüm internet" / sadece ihtiyacı olana en dar yetki.
 
 ## Backend / API
 - **REST** — URL + HTTP method ile kaynak yönetme kuralları (`GET /products`, `POST /orders`).
