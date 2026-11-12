@@ -61,6 +61,13 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
     "anlamadığı ama çok önemli" dediği konu: A'dan Z'ye ama **gerektiği kadar**, bol animasyon ve simülatörle.
     **Etik kural:** gerçek tarama/saldırı sadece kendi makinesine, kendi projesine (security-lab) veya buna açıkça izin veren
     hedeflere (ör. `scanme.nmap.org`) yapılır. Clopos'un ya da başkasının sistemlerine izinsiz tarama önerme; simülatör kullan.
+13. **Feynman tekniği, ezber yok (Gün 5 sonrası kalıcı kural).** Kullanıcı **ekonomi** okudu (IT geçmişi yok) ve ezberlemekten
+    nefret ediyor. Her ders **önce sade, sonra teknik**: ana sayfa `/tutorial/<gün>` = **sade anlatım** (Feynman döngüsü:
+    🧒 hikâye → 🎮 dokun → 🔮 tahmin et → 🗣️ sen anlat (`TeachBack`) → 🏷️ en son teknik adı (`TermCard`); bölümler `Reveal` ile tek tek
+    açılır), `/tutorial/<gün>/teknik` = terminal görevleri, "kır" görevleri, cheat sheet, derin simülatörler. Benzetmeler:
+    restoran + **ekonomi** (tedarik zinciri, arz-talep, kıt kaynak, hız↔güvenilirlik takası, asimetrik bilgi, güven/itibar).
+    Bileşenler: `components/tutorial/Feynman.tsx`. Terim önce değil **sonra** gelir; bir bölümde en fazla 3 yeni terim.
+    (Gün 5 istisna: ana sayfa teknik, sade versiyon `/tutorial/5/kolay`.)
 10. **Ezme.** Bir derste en fazla 3–4 yeni terim. SQL ↔ NoSQL gibi karşılaştırmalarda aynı veriyi iki tarafta yan yana göster.
 
 ## 3. Oturum başlangıç protokolü
@@ -158,6 +165,9 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
   listesi ve önceki/sonraki linkleri otomatik güncellenir. Güne özel interaktif parçalar o günün klasöründe (`tutorial/3/HttpLab.tsx`).
 - Ortak bileşenler (`components/tutorial/`): `FlowPlayer` (animasyonlu akış), `SortGame` (dnd-kit sürükle-bırak), `Quiz`,
   `TutorialShell` + `Section` + `Note`. Lab endpoint'leri: `app/api/tutorial/<konu>/route.ts`.
+- **Gün 6+ yapısı:** `tutorial/<gün>/page.tsx` (sade, Feynman bileşenleriyle) + `tutorial/<gün>/Sims.tsx` + `tutorial/<gün>/teknik/page.tsx`.
+  Sade sayfada her bölümün sonunda `TeachBack`, sayfa sonunda "final" `TeachBack` + `Quiz`. Güvenlik/pentest konuları simülatörle,
+  sahte verilerle ve savunma çerçevesinde anlatılır.
 - JSX metninde düz `'` kullanma (lint: `react/no-unescaped-entities`) → `’` kullan.
 - Her sayfada: (a) **animasyonlu akış diyagramı** (istek kutudan kutuya yanar), (b) **drag & drop alıştırma** (adımları sıraya diz),
   (c) **"Kır" butonları** (bilinçli hata), (d) **canlı log paneli** (requestId ile), (e) 3 soruluk quiz,
