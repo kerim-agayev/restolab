@@ -50,7 +50,7 @@ mutfak ekranı, ödeme, Z raporu, menü arama.
 
 | Gün | Konu | Yapacağımız | Bilinçli kıracağımız |
 |---|---|---|---|
-| 13 | PostgreSQL vs MSSQL, Neon (serverless, branching), connection string; **control plane** fikri | Prisma init, `control_db` | Yanlış şifre → hata mesajı |
+| 13 | PostgreSQL vs MSSQL, Neon (serverless, branching), connection string; **control plane** fikri | `control_db` + ham `pg` bağlantı lab’ı (Prisma init → Gün 14) | Yanlış şifre → hata mesajı |
 | 14 | Modelleme: ERD, normalization, 1-N / N-N, constraint (PK, FK, UNIQUE, CHECK) | `User`, `Restaurant`, `Membership` | FK ihlali |
 | 15 | Migration; PR başına Neon branch (preview DB) | `prisma migrate dev` | Migration drift |
 | 16 | **Register**: password hashing (argon2/bcrypt) | Restoran sahibi kaydı | Aynı email → unique violation |

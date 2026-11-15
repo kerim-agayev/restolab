@@ -12,9 +12,9 @@
 | | |
 |---|---|
 | **Tamamlanan son ders** | **Gün 7** (PR #10 merge ✅). Gün 5, 6 de merge ✅ |
-| **Devam eden ders** | **Gün 8–12** tek PR (branch `week-02/days-08-12`, main'den, stacked DEĞİL). Kullanıcı QA + merge |
+| **Devam eden ders** | **#11** Gün 8–12 (kullanıcı çalışıyor) → **#12** Gün 13 (branch `day-13/postgres-neon`, #11'in ÜSTÜNDE stacked). Sıra: #11 merge → rebase → #12 merge. #12 için kullanıcı Vercel'e `DATABASE_URL` + `DATABASE_URL_UNPOOLED` (Sensitive, Prod+Preview) eklemeli + redeploy |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
-| **Sonra** | **Gün 13** (Pzt 16 Kasım) — Postgres/Neon/Prisma, control plane. Kullanıcı önce Neon hesabı açmalı. Hafta planı: [HAFTA-3.md](HAFTA-3.md) |
+| **Sonra** | **Gün 14** — modelleme: Prisma init (Prisma 7: prisma.config.ts + driver adapter), ERD, User/Restaurant/Membership, FK ihlali. Plan: [HAFTA-3.md](HAFTA-3.md) |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
 | **Canlı** | https://restolab-kappa.vercel.app · repo: https://github.com/kerim-agayev/restolab |
 
@@ -46,6 +46,7 @@
 | 2026-11-12 | Gün 7 yapıldı: `/tutorial/7` + `/teknik`, `/api/tutorial/cache` (gerçek CDN cache lab), PR #10 (stacked, base day-06). Komutlar (curl HIT/age, CORS, OPTIONS) kullanıcının makinesinde doğrulandı | #8 → #9 → #10 sırayla merge; her merge'den sonra bir üstteki PR `git rebase --onto origin/main <alt-branch> <üst-branch>` |
 | 2026-11-15 | Kullanıcı #8'i squash merge etti → #9'da 4 dosyada conflict (squash yeni commit üretir, eski commit'ler 'farklı' görünür). Çözüm: `git rebase --onto origin/main day-05/network-1 day-06/network-2` + `git rebase --onto day-06/network-2 <eski-day06-sha> day-07/...` + force-with-lease. #9 CLEAN | #9 → #10 merge bekleniyor |
 | 2026-11-15 | #9, #10 merge ✅ (her birinde squash sonrası rebase --onto). Kullanıcı Pazar günü Gün 8–12'nin hepsini istedi → tek branch `week-02/days-08-12`, 5 commit (gün başına 1), zod eklendi. Lab API'leri (masa, cart) ve /tutorial/8/lab (use cache donuk, connection() taze) local'de doğrulandı. findstr minified HTML'de 'Line too long' → Select-String. HAFTA-3.md yazıldı | PR merge bekleniyor → Pzt Gün 13 |
+| 2026-11-15 | Kullanıcı Neon hesabı açtı, bağlantı adresini `.env.example`'a yapıştırdı (commit YOK). → `apps/web/.env.local`'e taşındı (git-ignored), şablon geri alındı, şifre hiçbir tracked dosyada yok (kontrol edildi). `neon init/deploy` kullanılmadı. Neon'da `CREATE DATABASE control_db`; sslmode=verify-full. Gün 13: `pg` + `lib/db.ts` + `/api/tutorial/db` + sayfalar. Local'de Neon'a uçtan uca test ✅ (cold start 2088 ms → 84 ms; 28P01/3D000/ENOTFOUND; leak check ✅) | PR #12 stacked; kullanıcı Vercel env eklemeli |
 
 ---
 
