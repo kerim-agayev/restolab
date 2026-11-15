@@ -17,6 +17,7 @@
 3. MCP'ler: Vercel (`mcp__vercel__*`) ve Neon (`mcp__neon__*`) araçları listede mi? Neon yoksa `claude mcp get neon` çalıştır
    (bkz. §12). **Asla yeniden `mcp add` yapma.**
 4. Sıradaki dersi bul: [docs/HAFTA-3.md](docs/HAFTA-3.md) (bu haftanın planı) → [ROADMAP.md](ROADMAP.md) (genel plan).
+4b. [docs/USTALIK.md](docs/USTALIK.md) → önceki günün 4 kapısı açık mı? Açık değilse **yeni derse geçme**: önce kapıyı kapat (kural 14).
 5. Kullanıcıya: 2 cümle "dün ne yaptık" + sıradaki dersin sorusu + "şimdi dersin sayfasını hazırlıyorum". Sonra **§10 ders üretim hattını** uygula.
 6. Tekrar quiz'ini (3 soru) sohbete değil, yeni dersin sayfasına (`Quiz` / `Predict`) koy; sohbette sadece "sayfada cevapla" de.
 
@@ -25,6 +26,7 @@
 |---|---|
 | Biten dersler | **Gün 1–14** (hepsi merge ✅). Gün 13–14 Modül 2'nin başı (Postgres/Neon, Prisma ERD) |
 | Sıradaki | **Gün 15** migrations (Prisma migrate, Neon branch, drift) → 16 register/hash → 17 login/JWT → 18 RBAC → 19 index. Plan: HAFTA-3.md |
+| **Ustalık kuralı** | Gün 16'dan itibaren her ders 4 kapıyla biter (anlattı · quiz · kırdı · işyeri cümleleri). Takip: docs/USTALIK.md. Kapı açılmadan geçilmez |
 | Ders formatı | Her gün: `/tutorial/<gün>` (sade, Feynman) + `/tutorial/<gün>/teknik` + `Sims.tsx` + gerekiyorsa `app/api/tutorial/<konu>/route.ts` |
 | Canlı | https://restolab-kappa.vercel.app (Vercel bölgesi **fra1**, Neon **eu-central-1** → sorgu ~2 ms) |
 | Repo | https://github.com/kerim-agayev/restolab — sadece **squash merge**, merge'ü **kullanıcı** yapar |
@@ -96,6 +98,23 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
     restoran + **ekonomi** (tedarik zinciri, arz-talep, kıt kaynak, hız↔güvenilirlik takası, asimetrik bilgi, güven/itibar).
     Bileşenler: `components/tutorial/Feynman.tsx`. Terim önce değil **sonra** gelir; bir bölümde en fazla 3 yeni terim.
     (Gün 5 istisna: ana sayfa teknik, sade versiyon `/tutorial/5/kolay`.)
+14. **Ustalık kapısı: Gün 16'dan sona kadar öğrenmeden geçilmez (kullanıcının açık isteği, 15 Kasım).** Gün 16+ konuları
+    (auth, transaction, NestJS, multi-tenancy, cache, Kafka, Docker, K8s, QA, CI/CD, observability, security) kullanıcının
+    işyerinde **her gün developer, QA ve DevOps'tan duyduğu** konular. Hedef: konuyu anlamak + **işyeri cümlelerini anlamak**.
+    Bir sonraki güne geçmeden önce **4 kapı** açılmalı ([docs/USTALIK.md](docs/USTALIK.md)'de gün gün işaretlenir):
+    1. 🗣️ **Kendi cümlesiyle anlattı:** sayfadaki final `TeachBack` metnini sohbete yapıştırdı; Claude değerlendirdi (eksik/yanlış noktaları tek tek söyler).
+    2. 🏁 **Quiz:** 3 sorudan en az 3'ü doğru (yanlış olanı Claude bir benzetmeyle yeniden anlatır, sonra **farklı** bir soru sorar).
+    3. 💥 **Kırdı ve okudu:** dersin "kır" görevini yaptı ve hata kodunu / logu **kendisi** yorumladı (Claude cevabı önce vermez, ipucu verir).
+    4. 🏢 **İşyeri cümleleri:** Claude o konudan **5 gerçekçi işyeri cümlesi** verir (Slack mesajı, PR yorumu, Jira bug'ı, standup, QA raporu,
+       DevOps alarmı, ör. *"staging'de migration drift var, prisma migrate deploy patladı"*); kullanıcı her birini kendi cümlesiyle açıklar +
+       "sen olsan ne cevap verirdin / ne yapardın". En az 4/5 doğru.
+    - Kapı açılmazsa: **geçme.** Aynı gün içinde 10–15 dk'lık **tekrar** yap (yeni benzetme, yeni simülatör adımı veya sayfaya "Tekrar" bölümü),
+      sonra kapıyı tekrar dene. Kullanıcı yorgunsa ertesi gün tekrarla başla; yeni konuya geçme.
+    - Kullanıcı "geçelim" derse bile önce hangi kapının eksik olduğunu söyle; kararı o verir ama eksik USTALIK.md'ye "⚠️ borç" olarak yazılır
+      ve ilgili sonraki derste ilk iş kapatılır.
+    - Her ders sayfasının sonunda **"🏢 İşyerinde böyle duyarsın"** bölümü olur: 8–10 gerçekçi cümle (dev / QA / DevOps / PM ağzından),
+      her birinin sade anlamı + "ne yapmalısın". Terimler GLOSSARY'ye "işyeri cümlesi" örneğiyle eklenir.
+    - Konular birbirine bağlanır: her ders ilk bölümde önceki günlerin **1–2 kavramını** yeni konunun içinde tekrar kullanır (aralıklı tekrar).
 10. **Ezme.** Bir derste en fazla 3–4 yeni terim. SQL ↔ NoSQL gibi karşılaştırmalarda aynı veriyi iki tarafta yan yana göster.
 
 ## 3. Oturum başlangıç protokolü
@@ -285,6 +304,8 @@ Bir ders ancak şunların hepsi bitince "hazır"dır. Sırayı koru; adımları 
 9. **Preview doğrula:** Vercel MCP `list_deployments` (branch) → READY bekle (build ~30 sn + deploy) → `web_fetch_vercel_url` ile lab endpoint'i ve sayfa (koruma var, curl çalışmaz).
 10. **Kullanıcıya teslim:** preview linki (`https://restolab-git-<branch-slug>-kerimagayevs-projects.vercel.app/tutorial/<gün>`), ne yapacağı (tek tek adım),
     "UI’da ne görmelisin" tablosu, PR linki, "bitince ‘XX merge ettim’ yaz". Merge'ü **kullanıcı** yapar.
+11. **Ustalık kapısı (Gün 16+):** sayfada "🏢 İşyerinde böyle duyarsın" bölümü olsun. Kullanıcı dersi bitirince: TeachBack değerlendir → quiz → "kır" yorumu →
+    5 işyeri cümlesi sor. Sonucu USTALIK.md'ye yaz. 4 kapı açılmadan sonraki derse başlama (kural 14).
 
 ## 11. Bilinen tuzaklar (yaşandı — tekrar yaşama)
 
