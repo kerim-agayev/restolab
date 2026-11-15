@@ -12,7 +12,7 @@
 | | |
 |---|---|
 | **Tamamlanan son ders** | **Gün 14** (PR #13 merge ✅). Gün 1–14 merge ✅. Production **fra1** ✅ (`x-vercel-id …::fra1`) |
-| **Devam eden ders** | **Gün 15** — branch `day-15/migrations` (main `a979264`'ten) |
+| **Devam eden ders** | **Gün 15** — branch `day-15/migrations`, sayfalar + lab hazır, PR açıldı. ⚠️ `add_restaurant_phone` migration'ı control_db'ye **uygulanmadı**: kullanıcı ders içinde `prisma migrate deploy` çalıştıracak. Uygulanana kadar bu PR'ın preview'ında Gün 14 'Dolma Evi'ni sil' → P2022 (bilinçli, derste anlatılıyor). Production etkilenmez (eski kod phone'u bilmiyor) |
 | **Neon MCP** | ✅ ÇALIŞIYOR (user scope, `projectId=summer-sunset-24930758`). `get_database_tables control_db` → users, restaurants, memberships, _prisma_migrations. Yazma işlemleri (branch açma, SQL) kullanıcı onayıyla. Araçlar görünmezse `claude mcp get neon`; yeniden `mcp add` YAPMA |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4: TIMEOUT ama logda 200. Gün 7: CORS açık soru |
 | **Sonra** | **Gün 15** — migrations: `prisma migrate dev`, migration dosyasını oku, Neon branch (PR başına DB), drift'i kır. Plan: [HAFTA-3.md](HAFTA-3.md) |
@@ -54,6 +54,7 @@
 | 2026-11-15 | Kullanıcı Neon MCP istedi (rehber: neon.com/guides/claude-code-mcp-neon). `claude mcp add --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"` → local scope, proje kilitli, read-only DEĞİL (kullanıcı 'idare edebilesin' dedi; yazma işlemleri onaylı). Durum: Needs authentication → kullanıcı `/mcp` ile OAuth yapacak. TOKENS.md §Neon 6 eklendi | OAuth bekleniyor; org hesabıysa API key yolu |
 | 2026-11-15 | İkinci sohbette 'neon bağlı değil' denmiş. Sebep: local scope tek klasör yoluna bağlı + MCP araçları sohbet başında yükleniyor. `claude mcp remove neon -s local` + `add --scope user` → her klasörde görünür; kullanıcı yeniden Authenticate etti → ✔ Connected. (Bu satır ve TOKENS.md notu #13 squash'ına girmemişti — commit ba502d7 — sonradan Gün 15 branch'ine taşındı) | yeni sohbet gerekir |
 | 2026-11-15 | Yeni sohbet Neon MCP'yi doğruladı (✔), #13 merge + production fra1 doğrulandı, `day-15/migrations` açtı; ama dersi SOHBETTE anlatmaya başladı (sayfa yok). Kullanıcı: 'her yeni sessionda sana dönmek zorunda kalmayayım'. → CLAUDE.md'ye §0 (yeni oturum ilk 5 dk + proje durumu), §10 (ders üretim hattı / Definition of Done), §11 (bilinen tuzaklar), §12 (altyapı kimlikleri) eklendi; §3, §9 ve kural 7 yenilendi | Sıradaki oturum: §0 → §10 ile Gün 15 sayfaları |
+| 2026-11-15 | Kullanıcı 'gün 15'e sen devam et'. Gün 15 §10'a göre üretildi: schema `Restaurant.phone String?` + `migrate dev --create-only` (uygulanmadı), `/api/tutorial/migrations` (GET defter↔klasör + şema↔sütun; POST safe/drift/rename/not-null hepsi ROLLBACK, lock_timeout 2s), `next.config.ts` outputFileTracingIncludes (migrations klasörü fonksiyona), `/tutorial/15` (6 bölüm, Gün 14 quiz'i + a/b tahminleri sayfada) + `/teknik`. Local test: pending ✅, 200 safe/drift, 42703, 23502; veri değişmedi. migrate status/diff çıktıları gerçek (deploy öncesi); deploy çıktısı Prisma'nın standart metni — kullanıcı çalıştırınca lab'dan doğrula. `prisma dev` (local Postgres) denendi, takıldı → kullanılmadı. Neon MCP bu oturumda yüklü değil (oturum MCP'den önce açıldı) | PR → preview → kullanıcı deploy + ders |
 
 ---
 

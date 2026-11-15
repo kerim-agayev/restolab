@@ -131,6 +131,13 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **onDelete: Cascade / Restrict** — Ana satır silinince bağlıları da sil / bağlı varken sildirme.
 - **Prisma 7: schema.prisma, prisma.config.ts, driver adapter, prisma generate** — Tek tarif dosyası / CLI ayarı (adres artık burada, .env'i kendisi okumaz) / sorguyu `pg` sürücüsüyle göndermesi / tipli client'ı üretmek (`generated/`, git'e girmez).
 - **Sequence gap** — Geri alınan insert'ler de id numarası yakar → id'lerde boşluk normaldir; fiş/fatura numarası id'den üretilmez.
+- **Migration / _prisma_migrations (Gün 15)** — Numaralı tadilat projesi (timestamp önekli klasör, `migration.sql`) / veritabanının içindeki tadilat defteri (ad, bitiş zamanı, checksum).
+- **Pending migration** — Klasörde var, veritabanında uygulanmamış. `prisma migrate status` → “have not yet been applied”.
+- **migrate dev / deploy / status / diff / reset, db push** — Geliştiricide üret+uygula (`--create-only`: sadece üret) / gerçek ortamda bekleyenleri uygula, asla reset atmaz / defter↔klasör / iki kaynak farkı (drift dedektörü) / her şeyi sil baştan kur (sadece local) / defter tutmadan bas (sadece deneme).
+- **Schema drift** — Veritabanının gerçek hâli ≠ migration'ların tarifi (biri elle `ALTER` yaptı). Muhasebe: deftere elle düzeltme yasak, ters kayıt fişi kesilir.
+- **Backward compatible / expand–contract / zero-downtime** — Eski kod çalışırken yapılabilen değişiklik / önce yeniyi ekle, herkes geçince eskiyi kaldır / sistemi durdurmadan tadilat. Sıra: **önce DB, sonra kod**.
+- **SQLSTATE 42703 / 55P03** — Sütun yok (Prisma P2022; kod DB'den öndeyken) / kilit alınamadı (`lock_timeout`). DDL tabloyu kısa süre kilitler.
+- **Neon branch / copy-on-write / preview DB** — Veritabanının anında açılan kopyası / değişene kadar aynı sayfaları paylaşmak / PR'a özel veritabanı (Gün 71'de otomatik).
 ## Cache & Redis
 - **Cache** — Pahalı sonucun hızlı bir yerde saklanmış kopyası. Buzdolabı: her seferinde markete gitmezsin.
 - **Redis** — RAM'de çalışan süper hızlı key-value veri deposu. Cache, sayaç, kuyruk, session, sıralama için.
