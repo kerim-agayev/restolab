@@ -10,4 +10,5 @@ export const LESSONS = [
   { day: 8, title: "Sayfa kim tarafından, ne zaman çiziliyor?", summary: "SSG / SSR / CSR (üç mutfak), Server vs Client Component, hydration — ve aynı saatin üç şekilde çizildiği canlı lab." },
   { day: 9, title: "Form nereye gidiyor, kim reddediyor?", summary: "“Masa aç” formu: Server Action + Route Handler, zod ile tek kural, tarayıcı vs sunucu kontrolü, 400 / 422 / 409." },
   { day: 10, title: "Para neden float olmaz, gece yarısı neden kayar?", summary: "0.1 + 0.2, qəpik ile tam sayı, hesap bölme ve ƏDV yuvarlaması, UTC vs Bakı saati, Z raporu iş günü." },
+  { day: 11, title: "Sepet nerede durur? State, güven ve hız", summary: "localStorage sepeti ve sunucuda fiyat kontrolü, server vs client state (TanStack / Redux / Zustand), optimistic UI, Core Web Vitals." },
 ] as const;
