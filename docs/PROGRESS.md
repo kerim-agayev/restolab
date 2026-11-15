@@ -12,6 +12,8 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 
 | 4 | 2026-11-11 | Açılış quiz'i (Gün 3): requestId ✅; **405 ve "client timeout ≠ server error" açıklayacak kadar oturmadı → tekrar**. `/tutorial/4`: TimeoutRace (Gün 3 tekrarı), DevTools Network simülatörü (gerçek istek + Resource Timing), curl Builder (PS vs Bash tırnakları), 6 terminal görevi, Copy as cURL, QA bug report şablonu. Endpoint'e 415 eklendi | Payload, Preview/Response, Initiator, Timing/TTFB, Preserve log, throttling, HAR, keep-alive, curl flag'leri, 415 | (kullanıcı görevleri sonrası doldurulacak) |
 
+| 5 | 2026-11-11 | Network 1 — `/tutorial/5`: yolculuk animasyonu, LayerStack (encapsulation + pentest katmanları), IP/subnet hesaplayıcı (bit görünümü), ARP + ARP spoofing/MITM simülatörü, NAT tablosu, port eşleştirme, TCP handshake/UDP + paket kaybı, nmap port tarama simülatörü (-sS/-sT), 4 gerçek + 6 "kır" terminal görevi (EADDRINUSE, refused vs timeout). Kullanıcının ağı: 192.168.0.103/24, gw 192.168.0.1 | OSI/TCP-IP, encapsulation, private/public IP, CIDR, MAC, ARP, MITM, NAT, port/socket, bind, EADDRINUSE, TCP/UDP, handshake, retransmission, open/closed/filtered | Gün 4 soruları cevaplanmadı (timeout, 405, Timing) → Gün 5 sonunda tekrar sor |
+
 ## Gün 1'de yaşanan gerçek bug (Gün 2 başında 1 dk tekrar)
 "Ortam: unknown" → (1) Turbo strict env modu değişkeni gizledi → `turbo.json` `env` listesi; (2) Vercel env ilk eklemede 3 ortama birden uygulandı;
 (3) env build anında gömülür → değişince redeploy; (4) boş commit "Skipped - Not affected" (affected builds).

@@ -40,6 +40,25 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **Hydration** — Sunucudan gelen "ölü" HTML'e React'in can vermesi (event'leri bağlaması).
 - **BFF (Backend for Frontend)** — Frontend'e özel küçük backend katmanı; diğer servisleri toplayıp tek cevap verir.
 
+## Network (Gün 5–6)
+- **OSI (7) / TCP-IP (4) katmanları** — Ağ işini katmanlara bölmek: Application (HTTP) → Transport (TCP/UDP, port) → Internet (IP) → Link (Ethernet/Wi‑Fi, MAC).
+- **Encapsulation** — Zarf içinde zarf: her katman kendi başlığını ekler; alıcı tersten açar.
+- **IP adresi (IPv4/IPv6)** — Binanın adresi. **Private** (192.168.x, 10.x, 172.16–31.x) iç ağ; **public** internette görünür; **127.0.0.1** = localhost (kendin).
+- **Subnet / CIDR (/24) / subnet mask** — Mahalle: ilk N bit ağın adı. Aynı subnet'tekiler doğrudan konuşur, diğerleri router üzerinden.
+- **MAC adresi** — Ağ kartının seri numarası; sadece yerel ağda, bir sonraki durağa kadar geçerli.
+- **ARP / ARP spoofing** — "Bu IP kimde?" diye MAC sormak / sahte cevapla trafiği kendine çekmek (MITM).
+- **MITM (Man-in-the-Middle)** — Saldırganın iki taraf arasına girip trafiği okuması. HTTPS içeriği korur.
+- **Router / Default gateway** — Ağları birbirine bağlayan cihaz / "bilmediğim her yer için buraya gönder" dediğin router.
+- **NAT** — Birçok private IP'yi tek public IP arkasına saklamak. `ipconfig` ≠ `ifconfig.me`'nin sebebi.
+- **Port / Socket / Ephemeral port** — Binadaki kapı (0–65535) / IP:port ikilisi / istemcinin geçici olarak açtığı rastgele port.
+- **LISTEN / bind (127.0.0.1 vs 0.0.0.0)** — Sunucunun portu dinlemesi / sadece bu bilgisayara mı yoksa tüm ağa mı açık olduğu.
+- **EADDRINUSE** — "Bu port zaten kullanımda" — aynı portu iki program dinleyemez.
+- **TCP / UDP** — Güvenilir, sıralı, bağlantılı (imzalı kargo) / hızlı, garantisiz (kartpostal).
+- **3-way handshake (SYN, SYN-ACK, ACK)** — TCP bağlantısını kurmak için el sıkışma.
+- **Retransmission** — TCP'nin kaybolan paketi fark edip tekrar göndermesi.
+- **Port tarama (nmap) — open / closed / filtered** — SYN-ACK geldi / RST geldi / hiç cevap yok (firewall). `-sS` yarı açık, `-sT` tam bağlantı.
+- **Connection refused (exit 7) vs timeout (exit 28)** — Makine cevap verdi ama o portta kimse yok / hiç cevap gelmedi.
+
 ## Backend / API
 - **REST** — URL + HTTP method ile kaynak yönetme kuralları (`GET /products`, `POST /orders`).
 - **Idempotency** — Aynı isteği 10 kez göndersen de sonuç 1 kez olur. Ödeme butonuna çift tıklamaya karşı.
