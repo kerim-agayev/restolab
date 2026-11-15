@@ -13,6 +13,7 @@
 |---|---|
 | **Tamamlanan son ders** | **Gün 13** (PR #12 merge ✅). Gün 1–12 merge ✅ |
 | **Devam eden ders** | **Gün 14** — branch `day-14/prisma-erd` (main'den, stacked DEĞİL). Kullanıcı preview'da yapacak → merge |
+| **Neon MCP** | `~/.claude.json` user scope, `projectId=summer-sunset-24930758`. Durum: kullanıcı `/mcp` → neon → Authenticate yapmalı, sonra YENİ sohbet. Sohbette araçlar yoksa `claude mcp get neon` çalıştır; **yeniden `mcp add` yapma** (sadece auth/yeni sohbet gerekir) |
 | **Dikkat** | PR #12, fra1 commit'leri (79c8917, 1f17199) girmeden merge edildi → **production hâlâ iad1**. Bu dosyalar Gün 14 PR'ına taşındı (commit 1793700): #13 merge olunca production fra1'e geçer |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4: TIMEOUT ama logda 200. Gün 7: CORS açık soru |
 | **Sonra** | **Gün 15** — migrations: `prisma migrate dev`, migration dosyasını oku, Neon branch (PR başına DB), drift'i kır. Plan: [HAFTA-3.md](HAFTA-3.md) |
@@ -52,6 +53,7 @@
 | 2026-11-15 | Kullanıcı onayıyla bölge taşındı: `apps/web/vercel.json` → `regions: ["fra1"]` (kod olarak, PR'da). Ölçüm (preview, ısınmış): ÖNCE iad1 sorgu ~92 ms / bağlantı ~565 ms → SONRA fra1 sorgu ~2 ms / bağlantı ~22–47 ms. x-vercel-id `fra1:iad1::iad1` → `fra1:iad1::fra1`. Gün 13 teknik sayfasına vaka olarak eklendi. Production merge'e kadar iad1'de | #12 merge bekleniyor |
 | 2026-11-15 | Kullanıcı #12'yi merge etti, 'gün 14 ile devam et'. Fark edildi: fra1 commit'leri squash'a girmemiş → `git checkout origin/day-13/postgres-neon -- <4 dosya>` ile Gün 14 branch'ine taşındı. Gün 14: Prisma **7.10.1** (npm `latest` = 8.0.0-rc → stabil sabitlendi), `prisma init` repoda ÇALIŞTIRILMADI (ajan skill klasörleri ekliyor) → dosyalar elle. prisma.config.ts `process.loadEnvFile('.env.local')` + UNPOOLED; lib/prisma.ts adapter-pg POOLED. Migration `init_users_restaurants` control_db'ye uygulandı, seed.sql (sahte, idempotent). Lab `/api/tutorial/erd` local'de 5/5 ✅ (200 rollback, 23503×2, 23505, 23001); veri 5 satırda kaldı. Studio Prisma 7'de rastgele port. lint/tsc/build ✅ | PR #13 açıldı → kullanıcı test |
 | 2026-11-15 | Kullanıcı Neon MCP istedi (rehber: neon.com/guides/claude-code-mcp-neon). `claude mcp add --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"` → local scope, proje kilitli, read-only DEĞİL (kullanıcı 'idare edebilesin' dedi; yazma işlemleri onaylı). Durum: Needs authentication → kullanıcı `/mcp` ile OAuth yapacak. TOKENS.md §Neon 6 eklendi | OAuth bekleniyor; org hesabıysa API key yolu |
+| 2026-11-15 | İkinci sohbette 'neon bağlı değil' denmiş. Sebep: local scope tek klasör yoluna bağlı + araçlar sohbet başında yükleniyor. `claude mcp remove neon -s local` + `add --scope user` → her klasörde görünür. Giriş yeniden gerekiyor (token eski kayda bağlıydı). TOKENS.md güncellendi | kullanıcı Authenticate → yeni sohbet → `control_db` tablolarını listele |
 
 ---
 

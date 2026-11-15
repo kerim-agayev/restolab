@@ -197,6 +197,7 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
   PowerShell'de içinde `"` olan çok satırlı commit mesajını `git commit -m` ile verme (argüman bozulur) → mesajı dosyaya yaz, `git commit -F <dosya>`.
   `gh` tam yolu: `C:\Program Files\GitHub CLI\gh.exe`. Kullanıcı ile **aynı klasörü** paylaşıyoruz: branch değiştirirsem onun terminali de değişir — söyle.
 - **Merge kararı kullanıcınındır:** Claude PR açar, merge'ü kullanıcı (QA rolünde) yapar. Vercel deploy/log kontrolü için Vercel MCP bağlı.
+  **Neon MCP** de bağlı (user scope, sadece restolab projesi; kurulum/kontrol: [docs/TOKENS.md](docs/TOKENS.md) Neon §6). Oturumda neon araçları görünmüyorsa MCP'yi yeniden ekleme: önce `claude mcp get neon` ile durumu oku, kullanıcıya "Authenticate + yeni sohbet" söyle. Yazma/silme/şema işlemlerinden önce kullanıcıya sor.
 
 ## 8. Ücretsiz servis haritası (Kasım 2026'da kontrol edildi)
 
