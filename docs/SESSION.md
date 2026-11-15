@@ -11,10 +11,10 @@
 
 | | |
 |---|---|
-| **Tamamlanan son ders** | **Gün 4** — DevTools + curl (PR #7, merge edildi 2026-11-11) |
-| **Devam eden ders** | #8 (Gün 5) merge ✅. Sırada: **#9** Gün 6 (base main, CLEAN) → **#10** Gün 7 (base `day-06/network-2`). Kullanıcı QA + merge |
+| **Tamamlanan son ders** | **Gün 7** (PR #10 merge ✅). Gün 5, 6 de merge ✅ |
+| **Devam eden ders** | **Gün 8–12** tek PR (branch `week-02/days-08-12`, main'den, stacked DEĞİL). Kullanıcı QA + merge |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
-| **Sonra** | **Gün 8** — Next.js render (Server/Client Component, SSR/SSG/CSR, hydration). Gelecek hafta planı: Gün 8–12 (aşağıdaki özet / ROADMAP Modül 1) |
+| **Sonra** | **Gün 13** (Pzt 16 Kasım) — Postgres/Neon/Prisma, control plane. Kullanıcı önce Neon hesabı açmalı. Hafta planı: [HAFTA-3.md](HAFTA-3.md) |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
 | **Canlı** | https://restolab-kappa.vercel.app · repo: https://github.com/kerim-agayev/restolab |
 
@@ -45,6 +45,7 @@
 | 2026-11-12 | Kullanıcı: Gün 5 zor, ekonomi okudu, ezber istemiyor → Feynman. `/tutorial/5/kolay` eklendi (PR #8'e). **CLAUDE.md kural #13**: her ders önce sade (Feynman), sonra `/teknik`. Gün 6 yapıldı: `/tutorial/6` + `/tutorial/6/teknik`, PR #9 (stacked). Kullanıcı Gün 6+7'yi bugün istedi | #8 merge → #9 rebase `git rebase --onto origin/main day-05/network-1 day-06/network-2` |
 | 2026-11-12 | Gün 7 yapıldı: `/tutorial/7` + `/teknik`, `/api/tutorial/cache` (gerçek CDN cache lab), PR #10 (stacked, base day-06). Komutlar (curl HIT/age, CORS, OPTIONS) kullanıcının makinesinde doğrulandı | #8 → #9 → #10 sırayla merge; her merge'den sonra bir üstteki PR `git rebase --onto origin/main <alt-branch> <üst-branch>` |
 | 2026-11-15 | Kullanıcı #8'i squash merge etti → #9'da 4 dosyada conflict (squash yeni commit üretir, eski commit'ler 'farklı' görünür). Çözüm: `git rebase --onto origin/main day-05/network-1 day-06/network-2` + `git rebase --onto day-06/network-2 <eski-day06-sha> day-07/...` + force-with-lease. #9 CLEAN | #9 → #10 merge bekleniyor |
+| 2026-11-15 | #9, #10 merge ✅ (her birinde squash sonrası rebase --onto). Kullanıcı Pazar günü Gün 8–12'nin hepsini istedi → tek branch `week-02/days-08-12`, 5 commit (gün başına 1), zod eklendi. Lab API'leri (masa, cart) ve /tutorial/8/lab (use cache donuk, connection() taze) local'de doğrulandı. findstr minified HTML'de 'Line too long' → Select-String. HAFTA-3.md yazıldı | PR merge bekleniyor → Pzt Gün 13 |
 
 ---
 

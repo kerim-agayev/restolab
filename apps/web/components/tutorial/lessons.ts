@@ -11,4 +11,5 @@ export const LESSONS = [
   { day: 9, title: "Form nereye gidiyor, kim reddediyor?", summary: "“Masa aç” formu: Server Action + Route Handler, zod ile tek kural, tarayıcı vs sunucu kontrolü, 400 / 422 / 409." },
   { day: 10, title: "Para neden float olmaz, gece yarısı neden kayar?", summary: "0.1 + 0.2, qəpik ile tam sayı, hesap bölme ve ƏDV yuvarlaması, UTC vs Bakı saati, Z raporu iş günü." },
   { day: 11, title: "Sepet nerede durur? State, güven ve hız", summary: "localStorage sepeti ve sunucuda fiyat kontrolü, server vs client state (TanStack / Redux / Zustand), optimistic UI, Core Web Vitals." },
+  { day: 12, title: "Modül 1 tekrarı: tek butonun tüm yolculuğu", summary: "Modül haritası, uçtan uca sıralama, açık kalan sorular, 8 soruluk sınav, terminal sınavı ve öz-değerlendirme." },
 ] as const;

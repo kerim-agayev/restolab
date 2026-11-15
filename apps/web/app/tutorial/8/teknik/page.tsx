@@ -20,9 +20,9 @@ const tasks: Task[] = [
   },
   {
     title: "Aynısını curl ile (JavaScript çalıştırmayan bir ‘tarayıcı’)",
-    cmd: "curl.exe -s https://restolab-kappa.vercel.app/tutorial/8/lab | findstr /c:\"Yükleniyor\"",
-    expect: "Eşleşen satır bulunur (CSR kutusunun boş hâli HTML’de)",
-    why: "curl JavaScript çalıştırmaz: CSR içeriği hiç gelmez. Arama motoru botlarının bir kısmı da böyle görür. (Merge’den sonra canlı adreste.)",
+    cmd: "curl.exe -s https://restolab-kappa.vercel.app/tutorial/8/lab | Select-String -SimpleMatch \"kleniyor\" -Quiet",
+    expect: "True (CSR kutusunun boş hâli ‘Yükleniyor…’ HTML’in içinde)",
+    why: "curl JavaScript çalıştırmaz: CSR içeriği hiç gelmez. Arama motoru botlarının bir kısmı da böyle görür. Not: findstr burada ‘Line is too long’ der (HTML sıkıştırılmış, tek dev satır) ve Türkçe ‘ü’ konsolda bozulabilir; bu yüzden Select-String ve ASCII bir parça (“kleniyor”) kullanıyoruz. (Merge’den sonra canlı adreste.)",
   },
   {
     title: "JavaScript’i kapatıp sayfaya bak",

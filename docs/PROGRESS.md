@@ -19,6 +19,12 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 
 | 7 | 2026-11-12 | HTTPS/HSTS, CDN/edge cache, CORS — `/tutorial/7` (sade) + `/tutorial/7/teknik`; gerçek cache lab'ı (`/api/tutorial/cache`, x-vercel-cache MISS→HIT), gerçek CORS denemesi (github vs iana), hata teşhis oyunu (6 belirti → katman) | HSTS, redirect, edge, origin, HIT/MISS, purge, Cache-Control, s-maxage, age, origin (CORS), preflight | (kullanıcı çalıştıktan sonra doldurulacak) |
 
+| 8 | 2026-11-15 | Render: SSG/SSR/CSR (üç mutfak), Server vs Client Component, hydration. Lab: `use cache` (donuk saat) / `connection()` (her istekte) / CSR fetch; bilerek bozuk hydration sayfası (#418) | SSG/ISR, SSR, CSR, Server/Client Component, bundle, hydration | (kullanıcı çalıştıktan sonra) |
+| 9 | 2026-11-15 | "Masa aç": Server Action + Route Handler, tek zod şeması, tarayıcı vs sunucu kontrolü, 400/422/409/415/405 | Server Action, validation, zod, 422, 409 | (kullanıcı çalıştıktan sonra) |
+| 10 | 2026-11-15 | Para: float tuzağı, qəpik (minor units), hesap bölme, ƏDV yuvarlama; zaman: UTC vs Asia/Baku, iş günü (Z raporu) | float, minor units, decimal, rounding, UTC, timezone, business day | (kullanıcı çalıştıktan sonra) |
+| 11 | 2026-11-15 | localStorage sepeti + sunucuda fiyat (tamper), server vs client state (TanStack/Redux/Zustand), optimistic UI (gerçek 503), CLS/Core Web Vitals | localStorage, httpOnly cookie, server/client state, store, optimistic update, rollback, LCP/INP/CLS | (kullanıcı çalıştıktan sonra) |
+| 12 | 2026-11-15 | Modül 1 tekrarı: harita, uçtan uca sıralama, Gün 4/5/7 açık soruları (TeachBack), 8 soruluk sınav, terminal sınavı, öz-değerlendirme | — | Kullanıcı Gün 8–12'yi aynı gün (Pazar) istedi |
+
 ## Gün 1'de yaşanan gerçek bug (Gün 2 başında 1 dk tekrar)
 "Ortam: unknown" → (1) Turbo strict env modu değişkeni gizledi → `turbo.json` `env` listesi; (2) Vercel env ilk eklemede 3 ortama birden uygulandı;
 (3) env build anında gömülür → değişince redeploy; (4) boş commit "Skipped - Not affected" (affected builds).
