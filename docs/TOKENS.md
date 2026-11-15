@@ -47,6 +47,11 @@
 4. Dashboard → **Connect**:
    - Connection pooling **açık** → `DATABASE_URL`
    - Connection pooling **kapalı** → `DATABASE_URL_UNPOOLED`
+   - Neon adreste `/neondb` verir → `/control_db` yap (control_db bir kez `CREATE DATABASE control_db` ile oluşturuldu, Gün 13).
+   - `sslmode=require` → `sslmode=verify-full` yaz (pg sürücüsünün uyarısı; TLS sertifikası tam kontrol).
+   - ⚠️ **Nereye yazılır:** `apps/web/.env.local` (git görmez) + Vercel → Settings → Environment Variables (**Sensitive**, Production + Preview).
+     **Asla `.env.example`'a değil** (o şablon, git'e girer). Sızarsa: Neon → Roles → Reset password (rotate).
+   - Neon'un önerdiği `neon init / neon deploy` CLI akışını kullanmıyoruz: bağlantıyı elle kurmak dersin konusu.
 5. (Gün 31) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
    Aynı URL'in pooled hâlinde DB adının yerine `{db}` yaz → `TENANT_DATABASE_URL_TEMPLATE`.
 

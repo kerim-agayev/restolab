@@ -25,6 +25,8 @@ Claude her ders sonunda buraya bir satır ekler. Zorlanılan yerler bir sonraki 
 | 11 | 2026-11-15 | localStorage sepeti + sunucuda fiyat (tamper), server vs client state (TanStack/Redux/Zustand), optimistic UI (gerçek 503), CLS/Core Web Vitals | localStorage, httpOnly cookie, server/client state, store, optimistic update, rollback, LCP/INP/CLS | (kullanıcı çalıştıktan sonra) |
 | 12 | 2026-11-15 | Modül 1 tekrarı: harita, uçtan uca sıralama, Gün 4/5/7 açık soruları (TeachBack), 8 soruluk sınav, terminal sınavı, öz-değerlendirme | — | Kullanıcı Gün 8–12'yi aynı gün (Pazar) istedi |
 
+| 13 | 2026-11-15 | Postgres/Neon: MSSQL→Postgres lehçe oyunu, connection string anatomisi, gerçek `control_db` lab'ı (`/api/tutorial/db`: SELECT + 28P01/3D000/ENOTFOUND, pooled vs direct), PoolSim, control plane. `control_db` CREATE DATABASE ile oluşturuldu. Prisma Gün 14'e kaydı (önce ham `pg` sürücüsü) | dialect, connection string, secret, rotate, pooler, PgBouncer, cold start, SQLSTATE, control plane | **Kullanıcı Neon adresini `.env.example`'a yapıştırdı** (commit'lenmeden yakalandı, `.env.local`'e taşındı) → secret yönetimi Gün 13 Bölüm 2'de işlendi |
+
 ## Gün 1'de yaşanan gerçek bug (Gün 2 başında 1 dk tekrar)
 "Ortam: unknown" → (1) Turbo strict env modu değişkeni gizledi → `turbo.json` `env` listesi; (2) Vercel env ilk eklemede 3 ortama birden uygulandı;
 (3) env build anında gömülür → değişince redeploy; (4) boş commit "Skipped - Not affected" (affected builds).

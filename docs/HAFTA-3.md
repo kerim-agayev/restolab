@@ -7,7 +7,7 @@
 
 | Gün | Tarih | Cevaplayacağı soru | Sade benzetme (ekonomi/restoran) | Elle yapacağın | Bilerek kıracağın |
 |---|---|---|---|---|---|
-| **13** | Pzt | Veritabanı nerede, uygulama ona nasıl bağlanıyor? | Arşiv binası + adres/anahtar (connection string). **Control plane** = holdingin merkez sicili: hangi restoran hangi defterde | Neon’da Postgres, Prisma kurulumu, `control_db` | Yanlış şifre → hata mesajını oku |
+| **13** | Pzt | Veritabanı nerede, uygulama ona nasıl bağlanıyor? | Arşiv binası + adres/anahtar (connection string). **Control plane** = holdingin merkez sicili: hangi restoran hangi defterde | ✅ **Erken yapıldı (15 Kasım):** Neon’da `control_db`, ham `pg` sürücüsüyle gerçek bağlantı lab’ı. (Prisma Gün 14’e kaydı: önce altındaki sürücüyü gör.) | Yanlış şifre → hata mesajını oku |
 | **14** | Sal | Veriyi hangi tablolara bölmeliyim? | **Hesap planı**: her bilgi tek bir yerde (normalization); ilişkiler = defterler arası çapraz referans | ERD; `User`, `Restaurant`, `Membership` (çoka-çok) | Var olmayan restorana üye ekle → **FK ihlali** |
 | **15** | Çar | Tabloyu canlıdayken nasıl değiştiririz? | Binanın **tadilat projeleri**: numaralı, sırayla, geri alınabilir | `prisma migrate dev`; PR başına ayrı veritabanı kopyası (Neon branch) | Plana yazılmamış elle değişiklik → **migration drift** |
 | **16** | Per | Şifreyi nasıl saklarız ki çalınsa bile işe yaramasın? | Kasada şifreyi değil **parmak izini** tutmak (hash) | Restoran sahibi kaydı (register), argon2/bcrypt | Aynı e-postayla ikinci kayıt → **unique violation** |
