@@ -14,4 +14,5 @@ export const LESSONS = [
   { day: 12, title: "Modül 1 tekrarı: tek butonun tüm yolculuğu", summary: "Modül haritası, uçtan uca sıralama, açık kalan sorular, 8 soruluk sınav, terminal sınavı ve öz-değerlendirme." },
   { day: 13, title: "Veri nerede yaşıyor? PostgreSQL ve Neon", summary: "MSSQL→Postgres lehçesi, bağlantı adresi (secret), gerçek control_db lab’ı ve hata kodları, connection pool (santral), control plane." },
   { day: 14, title: "Veriyi hangi tablolara bölmeliyim?", summary: "Tek büyük Excel’in sorunu (normalization), bir–çok / çok–çok, ERD, primary & foreign key, Prisma şeması — ve gerçek veritabanında FK ihlali (23503)." },
+  { day: 15, title: "Tabloyu canlıdayken nasıl değiştiririz?", summary: "Migration (tadilat defteri), migrate status / deploy ile gerçek bir sütun eklemek, güvenli vs tehlikeli değişiklik, önce DB sonra kod, drift ve Neon branch." },
 ] as const;

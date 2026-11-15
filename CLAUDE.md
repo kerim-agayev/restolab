@@ -2,6 +2,34 @@
 
 > Bu dosya **Claude'un kendisi için** çalışma kılavuzudur. Her oturumun başında okunur.
 
+## 0. ⚡ Yeni oturum: ilk 5 dakika (BUNU ATLAMA)
+
+> Kullanıcı her yeni oturumda baştan anlatmak zorunda kalmamalı. Bu bölüm + [docs/SESSION.md](docs/SESSION.md) yeterli olmalı.
+> Önceki oturumlarda yapılan hata: yeni oturum dersi **sohbette anlattı**, `/tutorial/<gün>` sayfasını yazmadı. ❌ Bu yanlış.
+> **Ders = sayfa + PR.** Sohbet sadece yönlendirme, kısa durum özeti ve kullanıcının cevaplarını değerlendirmek içindir.
+
+**Adım adım (sırayla, sessizce yap; sonra kullanıcıya 5–8 satırlık durum özeti ver):**
+1. [docs/SESSION.md](docs/SESSION.md) → "Şu an" tablosu + "Adım günlüğü"nün son 5 satırı.
+2. Git durumu (paylaşılan klasör!):
+   `git branch --show-current; git status --short; git fetch -q; git log --oneline -3 origin/main`
+   `& "C:\Program Files\GitHub CLI\gh.exe" pr list --state all --limit 5`
+   → Açık PR var mı? Son PR merge edilmiş mi? Kullanıcının yaptığını PR durumundan oku, ona sorma.
+3. MCP'ler: Vercel (`mcp__vercel__*`) ve Neon (`mcp__neon__*`) araçları listede mi? Neon yoksa `claude mcp get neon` çalıştır
+   (bkz. §12). **Asla yeniden `mcp add` yapma.**
+4. Sıradaki dersi bul: [docs/HAFTA-3.md](docs/HAFTA-3.md) (bu haftanın planı) → [ROADMAP.md](ROADMAP.md) (genel plan).
+5. Kullanıcıya: 2 cümle "dün ne yaptık" + sıradaki dersin sorusu + "şimdi dersin sayfasını hazırlıyorum". Sonra **§10 ders üretim hattını** uygula.
+6. Tekrar quiz'ini (3 soru) sohbete değil, yeni dersin sayfasına (`Quiz` / `Predict`) koy; sohbette sadece "sayfada cevapla" de.
+
+### Proje durumu (anlık görüntü — kesin bilgi her zaman SESSION.md'de)
+| | |
+|---|---|
+| Biten dersler | **Gün 1–14** (hepsi merge ✅). Gün 13–14 Modül 2'nin başı (Postgres/Neon, Prisma ERD) |
+| Sıradaki | **Gün 15** migrations (Prisma migrate, Neon branch, drift) → 16 register/hash → 17 login/JWT → 18 RBAC → 19 index. Plan: HAFTA-3.md |
+| Ders formatı | Her gün: `/tutorial/<gün>` (sade, Feynman) + `/tutorial/<gün>/teknik` + `Sims.tsx` + gerekiyorsa `app/api/tutorial/<konu>/route.ts` |
+| Canlı | https://restolab-kappa.vercel.app (Vercel bölgesi **fra1**, Neon **eu-central-1** → sorgu ~2 ms) |
+| Repo | https://github.com/kerim-agayev/restolab — sadece **squash merge**, merge'ü **kullanıcı** yapar |
+| Veritabanı | Neon proje `summer-sunset-24930758`, branch `production`, database **`control_db`** (tablolar: `users`, `restaurants`, `memberships`, `_prisma_migrations`; sahte seed) |
+
 ## 1. Bu proje nedir?
 
 Kullanıcı (Karim) **Clopos**'ta (restoran yönetim sistemi / POS) "vibe coder" olarak frontend işleri yapıyor. Claude Code ile kod
@@ -50,7 +78,7 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
 5. **Kullanıcı yazar, Claude rehberlik eder.** Kritik küçük parçaları (transaction, consumer, guard, migration) kullanıcıya yazdır
    veya satır satır birlikte geç. Boilerplate'i Claude yazabilir ama **her dosyayı 2–3 cümleyle açıkla**.
 6. **1 saatlik format:** 10 dk kavram → 35 dk yap → 10 dk kır & log oku → 5 dk özet + 3 soruluk quiz. Taşarsa böl; kullanıcı yorgun.
-7. **Her ders bir `/tutorial` sayfası üretir** (§6).
+7. **Her ders bir `/tutorial` sayfası üretir** (§6, üretim hattı §10). Ders sohbette anlatılmaz: önce sayfa + PR, sohbet yönlendirir.
 8. **Ders sonunda** [docs/PROGRESS.md](docs/PROGRESS.md) güncellenir; yeni terimler [docs/GLOSSARY.md](docs/GLOSSARY.md)'ye eklenir.
 9. **Şirket köprüsü:** Her konuda "Clopos reposunda bunu nerede arayabilirsin / backend'ci hangi cümleyle söyler" bölümü olsun.
 11. **Junior seviyesinde anlat (Gün 1 dersi).** Kullanıcı hızlı ve terim yoğun anlatımda kayboluyor. Panel/terminal işlerinde
@@ -72,14 +100,14 @@ Kullanıcı Azerbaycan Türkçesi terimleri kullanır (anbar, mədaxil, məxaric
 
 ## 3. Oturum başlangıç protokolü
 
-0. **[docs/SESSION.md](docs/SESSION.md)'yi oku** → adım adım "nerede kaldık" + sıradaki yapılacaklar listesi.
-   Her önemli adımdan sonra (branch/PR/ders bitişi/takılma) SESSION.md'nin "Adım günlüğü" ve "Şu an" bölümünü **hemen** güncelle —
-   oturum kaybolsa bile kaldığımız yer buradan bulunur.
-1. [docs/PROGRESS.md](docs/PROGRESS.md)'yi oku → kaçıncı gün, en son nerede zorlandı?
-2. [ROADMAP.md](ROADMAP.md)'den o günün dersini bul.
-3. Gerekli token var mı (`.env`)? Eksikse [docs/TOKENS.md](docs/TOKENS.md)'deki adımı birlikte yap.
-4. 2 cümle "dün ne yaptık" + 3 soruluk tekrar quiz'i.
-5. **Yeni branch aç** (§5) — her ders bir PR'dır.
+Kısa hâli §0'da. Ek kurallar:
+- **SESSION.md her önemli adımdan sonra HEMEN güncellenir** ("Şu an" tablosu + "Adım günlüğü"ne bir satır): branch açıldı, PR açıldı,
+  preview doğrulandı, kullanıcı takıldı, kullanıcı cevap verdi, MCP/servis kuruldu. Oturum kopsa bile sonraki oturum buradan devam eder.
+- [docs/PROGRESS.md](docs/PROGRESS.md) → ders bazlı özet + "zorlandığı" sütunu (kullanıcının TeachBack/quiz cevaplarından doldur).
+- Token/servis eksikse [docs/TOKENS.md](docs/TOKENS.md)'deki adımı **tek adım tek adım** birlikte yap (önce "neden gerekli" anlat — kural 11).
+- Kullanıcının bekleyen cevapları SESSION.md "Cevap bekleyen sorular" satırında. Uygun derste kısaca sor, zorlama.
+- Paylaşılan klasör: kullanıcıyla **aynı klasörü** kullanıyoruz. Aynı anda iki Claude oturumu bu klasörde çalışmamalı (dosyalar karışır).
+  Branch değiştirince kullanıcıya "senin terminalin de X branch'ine geçti" de.
 
 ## 4. Mimari (hedef — adım adım inşa edilir)
 
@@ -218,9 +246,81 @@ feature/day-05-order-form ──PR──▶ main  ──merge/promote──▶ a
 
 Limitler değişir; servisi ilk kullandığımız gün güncel limiti birlikte kontrol et.
 
-## 9. Komutlar (proje kuruldukça doldurulacak)
+## 9. Komutlar
 ```
-pnpm install
-pnpm dev                      # turbo ile tüm uygulamalar
-pnpm --filter web dev         # sadece web
+pnpm install                                   # postinstall → prisma generate
+pnpm --filter web dev                          # http://localhost:3000 (test için farklı port: apps/web içinde npx next dev -p 3014)
+pnpm --filter web build                        # prisma generate && next build (Vercel'in yaptığı)
+pnpm --filter web exec eslint .                # lint (generated/ ignore'lu)
+pnpm --filter web exec tsc --noEmit            # tip kontrolü
+pnpm --filter web db:validate | db:format      # Prisma şema kontrol / biçim
+pnpm --filter web exec prisma migrate dev --name <ad>   # yeni migration (UNPOOLED adres, prisma.config.ts)
+pnpm --filter web db:seed                      # prisma/seed.sql (idempotent, sahte veri)
+pnpm --filter web db:studio                    # Prisma Studio (Prisma 7: port RASTGELE, terminalde yazanı aç)
+& "C:\Program Files\GitHub CLI\gh.exe" pr create --base main --head <branch> --title "..." --body-file <dosya>
 ```
+
+## 10. Ders üretim hattı (Definition of Done) — HER GÜN AYNI
+
+Bir ders ancak şunların hepsi bitince "hazır"dır. Sırayı koru; adımları kullanıcıya sormadan yap (sadece ücretli servis, Neon'da yazma/şema/branch, secret paylaşımı için sor).
+
+1. **Branch:** `git switch main; git pull --ff-only; git switch -c day-XX/<konu>` — her zaman **main'den** (stacked PR yok; bkz. §11).
+2. **Plan:** HAFTA-3.md/ROADMAP satırını oku → dersin tek sorusu, ekonomi/restoran benzetmesi, elle yapılacak iş, bilerek kırılacak şey.
+   Next.js/Prisma API'si yazmadan önce **kurulu paketin** dokümanına/tiplerine bak (`apps/web/node_modules/next/dist/docs/`, `node_modules/.pnpm/...`).
+3. **Lab (gerekiyorsa):** `apps/web/app/api/tutorial/<konu>/route.ts` — JSON log (`msg: "tutorial.<konu>"`, `requestId`), `cache-control: no-store`,
+   "kır" senaryoları **zararsız** (yazma → transaction + bilerek ROLLBACK; secret asla cevapta/logda yok). Örnek: `api/tutorial/erd/route.ts`.
+4. **Sayfalar** (örnek al: `apps/web/app/tutorial/14/`):
+   - `tutorial/<gün>/Sims.tsx` (`"use client"`): 3–5 simülatör (dokun-gör), biri gerçek lab'a bağlı.
+   - `tutorial/<gün>/page.tsx` (sade): `TutorialShell` → giriş `Econ` → 4–5 `Chapter` (her biri: `Story` → `Try`(Sim) → `Predict` → `TeachBack` → `TermCard` ≤3 terim)
+     → final `TeachBack` → 3 soruluk `Quiz` → "👀 UI’da ne görmelisin?" listesi → teknik sayfa linki. İlgiliyse `Note icon="🤖"` (Claude Code bunu derse…).
+     Önceki günün tekrar sorularını ilk bölümde `Predict` veya küçük bir `Quiz` olarak ver.
+   - `tutorial/<gün>/teknik/page.tsx`: `TaskList` görevleri (`title/cmd/expect/why`) — Neon SQL Editor, terminal, DevTools; "Kır ve oku";
+     cheat sheet; dosya haritası; 🏢 Clopos köprüsü; 📖 okuma notu.
+   - `components/tutorial/lessons.ts`'e satır ekle.
+   - **`expect` alanlarına sadece GERÇEKTEN çalıştırıp gördüğün çıktıyı yaz** (local'de veya Neon'da dene; şifreyi maskele).
+5. **Doğrula (local):** `eslint .` + `tsc --noEmit` + `pnpm --filter web build` temiz; dev sunucusunda sayfalar 200; lab endpoint'inin her senaryosu curl ile.
+6. **Dokümanlar:** PROGRESS.md (yeni satır), GLOSSARY.md (yeni terimler), SESSION.md (Şu an + günlük), HAFTA-3.md (✅), yeni env varsa `.env.example` + TOKENS.md.
+7. **Secret kontrolü:** `git add -A -- . ':!ogrenilecekler.txt'` → staged diff'te DB şifresi yok mu kontrol et (bkz. §11).
+8. **Commit + PR:** mesajı dosyaya yaz → `git commit -F <dosya>` (Conventional Commits, Co-Authored-By satırı). PR gövdesi: ne var + **QA checklist** (preview'da işaretlenecek maddeler).
+9. **Preview doğrula:** Vercel MCP `list_deployments` (branch) → READY bekle (build ~30 sn + deploy) → `web_fetch_vercel_url` ile lab endpoint'i ve sayfa (koruma var, curl çalışmaz).
+10. **Kullanıcıya teslim:** preview linki (`https://restolab-git-<branch-slug>-kerimagayevs-projects.vercel.app/tutorial/<gün>`), ne yapacağı (tek tek adım),
+    "UI’da ne görmelisin" tablosu, PR linki, "bitince ‘XX merge ettim’ yaz". Merge'ü **kullanıcı** yapar.
+
+## 11. Bilinen tuzaklar (yaşandı — tekrar yaşama)
+
+| Tuzak | Doğrusu |
+|---|---|
+| Dersi sohbette anlatmak, sayfa yazmamak | §10. Ders = sayfa + PR |
+| Stacked PR (bir branch'i diğerinin üstüne açmak) + squash merge → çakışma | Her ders main'den. Olduysa: `git rebase --onto origin/main <eski-taban> <branch>` + `push --force-with-lease` |
+| Kullanıcı PR'ı, son commit'ler girmeden merge etti (#12'de fra1 kaçtı) | Push'tan sonra "PR'a X commit eklendi" de; merge sonrası `git diff <squash-commit> origin/<branch> --stat` ile kaçan var mı kontrol et |
+| Secret'ı `.env.example`'a yapıştırmak | Gerçek değer: `apps/web/.env.local` (git-ignored) + Vercel (Secret). Şifreyi hiçbir çıktıda gösterme (`sed -E 's#://[^@]*@#://***@#g'`) |
+| `ogrenilecekler.txt` | Kullanıcının kişisel notu, **asla commit etme** (`':!ogrenilecekler.txt'`) |
+| Eski panel terimleri ("Sensitive") | Vercel paneli şu an **Secret / Config** diyor. Panel adımı yazmadan önce güncel adı doğrula |
+| `react-hooks/purity` lint: `Date.now()`, `performance.now()`, `Math.random()` component/handler içinde | Sayaç kullan veya zamanı sunucudan al |
+| JSX'te düz `'` | `’` kullan (`react/no-unescaped-entities`) |
+| PowerShell: çok satırlı/tırnaklı `git commit -m` | Mesajı dosyaya yaz → `git commit -F` |
+| `findstr` minified HTML'de "Line too long", Türkçe karakter bozuk | `Select-String -SimpleMatch "..." -Quiet` |
+| Python `print` Türkçe 'ı' → cp1252 hatası | Dosyaya `encoding="utf-8"` yaz, ekrana basma |
+| Uzun Python/heredoc'u Bash'e satır içi vermek tırnakları bozuyor | Script'i scratchpad'e dosya olarak yaz, sonra çalıştır |
+| `Start-Sleep` / foreground `sleep` engelli | Bash `run_in_background` ile bekle, bildirim gelince devam |
+| npm `latest` bazen RC (prisma `latest` = 8.0.0-rc) | `npm view <pkg> dist-tags` → stabil sürümü sabitle (Prisma **7.10.1**) |
+| `prisma init` repoya ajan skill klasörleri (`.claude/skills`, `.agents`…) ekliyor | Repoda çalıştırma; dosyaları elle yaz (yapıldı) |
+| Prisma 7: `.env` otomatik okunmaz; client `generated/prisma` (git'e girmez) | `prisma.config.ts` → `process.loadEnvFile(".env.local")`; build = `prisma generate && next build` |
+| Turbo build uyarısı "DATABASE_URL missing from turbo.json" | Sadece build adımı için; runtime'da değişkenler var. Build sırasında DB gerekirse `turbo.json` `env`'e ekle |
+| Vercel Hobby varsayılan bölge iad1 (ABD) | `apps/web/vercel.json` → `"regions": ["fra1"]` (yapıldı) |
+| Preview alias'ını build READY olmadan açmak → 404 önbelleğe girer (`x-vercel-cache: HIT`) | Önce `get_deployment` → READY bekle; şüphede deploy'un kendi URL'ini veya `?r=1` ile dene. Kullanıcıya: “Ctrl+F5” |
+| Neon MCP "yok" sanmak | §12: araçlar oturum başında yüklenir; `claude mcp get neon` → Connected ise kullanıcıya "yeni sohbet aç" de |
+| Güvenlik/pentest içeriği | Sadece simülatör, sahte veri, savunma çerçevesi (kural 12) |
+
+## 12. Altyapı kimlikleri ve bağlantılar (secret DEĞİL)
+
+| Ne | Değer |
+|---|---|
+| Vercel proje | `prj_xE3WViPql3CatzxFXeYZ4Rmp6JiP` · team slug `kerimagayevs-projects`. Vercel MCP ile: deploy listesi, build log, runtime log, env (Secret), redeploy |
+| Vercel env (Production + Preview, Secret) | `DATABASE_URL` (pooled, `-pooler` host) · `DATABASE_URL_UNPOOLED` (direkt; migrate) · `RELEASE_CHANNEL` |
+| Preview URL kalıbı | `https://restolab-git-<branch, / yerine ->-kerimagayevs-projects.vercel.app` (Deployment Protection açık → Vercel MCP `web_fetch_vercel_url`) |
+| Neon | proje `summer-sunset-24930758` · org `org-winter-block-25416581` · region eu-central-1 · Postgres 18 · DB `control_db` · rol `neondb_owner` · `sslmode=verify-full` |
+| Neon MCP | `claude mcp add --scope user --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"` (yapıldı, OAuth, **user scope**). Kontrol: `claude mcp get neon` → `✔ Connected`. Araçlar sohbette yoksa ve auth tamamsa **yeni sohbet** gerekir. Yazma/şema/branch işlemlerinden önce kullanıcıya sor; deneme işleri Neon branch'te |
+| Local secret dosyası | `apps/web/.env.local` (iki URL). Okurken şifreyi maskele |
+| Kod haritası (DB) | `apps/web/lib/db.ts` (ham pg pool, Gün 13) · `apps/web/lib/prisma.ts` (Prisma + adapter-pg, Gün 14) · `apps/web/prisma/` (schema, migrations, seed.sql) · `apps/web/prisma.config.ts` |
+| Ortak ders bileşenleri | `components/tutorial/`: `Feynman.tsx` (Chapter, Reveal, Story, Econ, Try, Predict, TeachBack, TermCard, Deeper), `TaskList.tsx`, `Quiz.tsx`, `TutorialShell.tsx` (TutorialShell, Section, Note), `FlowPlayer`, `SortGame`, `lessons.ts` |

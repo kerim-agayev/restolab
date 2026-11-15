@@ -55,8 +55,11 @@
 5. (Gün 31) Aynı ekranda database'i `postgres` seç, pooling **kapalı** → `TENANT_ADMIN_DATABASE_URL`.
    Aynı URL'in pooled hâlinde DB adının yerine `{db}` yaz → `TENANT_DATABASE_URL_TEMPLATE`.
 6. **Neon MCP (Claude Code ↔ Neon, 15 Kasım):** Claude'un SQL çalıştırması, şemaya bakması, Neon loglarını okuması için.
-   - Kurulum (yapıldı): `claude mcp add --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"`
-     → **local scope** (sadece bu bilgisayar, `~/.claude.json`, git'e girmez) · **sadece restolab projesi** (`projectId`).
+   - Kurulum (yapıldı): `claude mcp add --scope user --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"`
+     → **user scope** (bu bilgisayarda HER klasörde/sohbette geçerli, `~/.claude.json`, git'e girmez) · **sadece restolab projesi** (`projectId`).
+     ⚠️ İlk denemede `local` scope kullanıldı: o sadece tek klasör yoluna bağlı, başka klasörden açılan sohbet Neon'u göremedi → user scope'a taşındı.
+   - Kontrol (terminalde): `claude mcp get neon` → `✔ Connected` olmalı. `! Needs authentication` ise `/mcp` → neon → Authenticate.
+   - ⚠️ MCP araçları sohbet BAŞLARKEN yüklenir: ekleme/giriş sonrası **yeni sohbet** aç. Sohbette neon araçları yoksa (run_sql, list_projects…) yeniden kurma, önce bu iki satırı kontrol et.
    - Giriş: Claude Code'da `/mcp` → `neon` → **Authenticate** → tarayıcıda Neon onayı (OAuth). Şifre/anahtar sohbete yazılmaz.
    - OAuth sadece kişisel hesaba erişirse (proje bir organization'daysa): Neon → Organization settings → API keys → key oluştur →
      **kendi terminalinde** `claude mcp remove neon -s local` + aynı komut `--header "Authorization: Bearer <KEY>"` ile. Key'i Claude'a yapıştırma.

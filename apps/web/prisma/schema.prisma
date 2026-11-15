@@ -41,6 +41,8 @@ model Restaurant {
   slug        String       @unique
   name        String
   timezone    String       @default("Asia/Baku")
+  /// Gün 15: ikinci tadilat projesi. Boş bırakılabilir (?) → eski kod ve eski satırlar bozulmaz (güvenli migration).
+  phone       String?
   createdAt   DateTime     @default(now()) @map("created_at")
   memberships Membership[]
 
