@@ -308,6 +308,7 @@ Bir ders ancak şunların hepsi bitince "hazır"dır. Sırayı koru; adımları 
 | Prisma 7: `.env` otomatik okunmaz; client `generated/prisma` (git'e girmez) | `prisma.config.ts` → `process.loadEnvFile(".env.local")`; build = `prisma generate && next build` |
 | Turbo build uyarısı "DATABASE_URL missing from turbo.json" | Sadece build adımı için; runtime'da değişkenler var. Build sırasında DB gerekirse `turbo.json` `env`'e ekle |
 | Vercel Hobby varsayılan bölge iad1 (ABD) | `apps/web/vercel.json` → `"regions": ["fra1"]` (yapıldı) |
+| Preview alias'ını build READY olmadan açmak → 404 önbelleğe girer (`x-vercel-cache: HIT`) | Önce `get_deployment` → READY bekle; şüphede deploy'un kendi URL'ini veya `?r=1` ile dene. Kullanıcıya: “Ctrl+F5” |
 | Neon MCP "yok" sanmak | §12: araçlar oturum başında yüklenir; `claude mcp get neon` → Connected ise kullanıcıya "yeni sohbet aç" de |
 | Güvenlik/pentest içeriği | Sadece simülatör, sahte veri, savunma çerçevesi (kural 12) |
 
