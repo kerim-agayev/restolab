@@ -119,6 +119,7 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **PostgreSQL vs MSSQL (dialect)** — Aynı dil, farklı lehçe: `LIMIT` vs `TOP`, `now()` vs `GETDATE()`, `||` vs `+`, `COALESCE` vs `ISNULL`, `TEXT`/`TIMESTAMPTZ` vs `NVARCHAR`/`DATETIME2`, `snake_case` isimler.
 - **Connection string** — Veritabanının adresi + anahtarı (protokol, kullanıcı, şifre, host, port 5432, veritabanı, sslmode). Tamamı secret.
 - **Pooled vs direct (unpooled) URL / PgBouncer / max_connections** — Santralli adres (çok kısa istek, serverless) / doğrudan hat (migration) / Postgres'in santral yazılımı / hat sınırı ("too many connections").
+- **Function region / data locality** — Kodun çalıştığı veri merkezi (Vercel: iad1 = Washington, fra1 = Frankfurt) / kodu verinin yanında çalıştır. Gün 13 vakası: iad1→fra1 ile sorgu 92 ms → 2 ms.
 - **Cold start (serverless DB)** — Uyuyan veritabanının ilk istekte uyanma gecikmesi (Neon: ilk sorgu ~2 sn, sonra ~80 ms).
 - **SQLSTATE 28P01 / 3D000 / ENOTFOUND** — Şifre yanlış / veritabanı yok / host çözülemedi (DNS).
 - **Control plane / data plane / tenant** — Merkez sicil (hangi restoran hangi DB'de, hangi kanalda: `control_db`) / restoranın kendi verisi / sistemi kullanan müşteri (restoran).

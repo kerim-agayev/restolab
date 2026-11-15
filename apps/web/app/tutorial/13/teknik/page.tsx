@@ -72,6 +72,12 @@ const breakTasks: Task[] = [
     expect: "28P01 password authentication failed · 3D000 database \"olmayan_db\" does not exist · ENOTFOUND ep-olmayan-host.invalid",
     why: "Loglarda şifre hiç geçmiyor: kod adresi yazdırmadan önce şifreyi atıyor. Log’a secret yazmamak da bir güvenlik kuralı.",
   },
+  {
+    title: "Gerçek vaka (15 Kasım): kod ABD’de, veritabanı Frankfurt’ta",
+    cmd: "DevTools → Network → /api/tutorial/db isteği → Response Headers → x-vercel-id\nÖnce: fra1:iad1::iad1   (kapı Frankfurt, kod Washington)\nDüzeltme: apps/web/vercel.json → { \"regions\": [\"fra1\"] }\nSonra: fra1:iad1::fra1  (kod Frankfurt’ta, Neon’un yanında)",
+    expect: "Sorgu: ~92 ms → ~2 ms (≈45 kat) · Bağlantı kurma: ~565 ms → ~22–47 ms (≈15 kat)",
+    why: "Her sorgu Atlantik’i gidip geliyordu. Bir sayfa 20 sorgu yapsa 2 saniye kayıp. Kural: kodu verinin yanında çalıştır (data locality). Vercel’in ücretsiz planı varsayılan olarak ABD’yi (iad1) seçer; tek bir bölge seçebilirsin. Ayarı panel yerine vercel.json ile yaptık ki PR’da görünsün ve önce preview’da test edilsin.",
+  },
 ];
 
 export default function Day13Technical() {
