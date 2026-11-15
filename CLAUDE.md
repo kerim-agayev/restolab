@@ -21,8 +21,8 @@ Tam tanıtım: [docs/PRODUCT.md](docs/PRODUCT.md). Clopos gibi **aynı backend'i
 | App | Clopos karşılığı | Başlangıç |
 |---|---|---|
 | `apps/web` Admin Panel (Dashboard, Menü, Anbar, Texnoloji kart, İnventarlaşdırma, Hesabatlar, Zallar, İşçiler, QR, Ayarlar) + `/tutorial` | client | Gün 1 |
-| `apps/qr-menu` | QR menü | Gün 8 |
-| `apps/terminal` POS (PWA, offline) | Terminal | Gün 9 |
+| `apps/qr-menu` | QR menü | ertelendi (Gün 8 render dersi `/tutorial/8` içinde yapıldı; ayrı app ilk ihtiyaçta) |
+| `apps/terminal` POS (PWA, offline) | Terminal | ertelendi (Gün 9 form dersi `/tutorial/9` içinde) |
 | `apps/kds` Mutfak ekranı | KDS | Gün 54 |
 | `apps/kiosk` Self-servis | Kiosk (Subway) | Gün 56 |
 | `apps/mobile` Garson + Manager (Expo) | Ofisiant app, Clopos Manager | Opsiyonel Modül 16 |

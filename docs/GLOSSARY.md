@@ -45,6 +45,17 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **Hydration** — Sunucudan gelen "ölü" HTML'e React'in can vermesi (event'leri bağlaması).
 - **BFF (Backend for Frontend)** — Frontend'e özel küçük backend katmanı; diğer servisleri toplayıp tek cevap verir.
 
+- **SSG / ISR / SSR / CSR** — Önceden basılmış sayfa / aralıklarla yeniden basılan / her istekte sunucuda / tarayıcıda JS ile. Next 16: `'use cache'` + `cacheLife`, `await connection()` + `<Suspense>`. Build işaretleri: ○ statik, ◐ partial prerender, ƒ dinamik.
+- **Server Component / Client Component (`"use client"`) / bundle** — Mutfakta hazırlanan, kodu tarayıcıya gitmeyen parça / tarayıcıda çalışan etkileşimli parça / tarayıcıya inen JS paketi.
+- **Hydration / mismatch (#418)** — HTML resmini JS ile canlandırmak / sunucu ve tarayıcı farklı içerik üretti (saat, random, localStorage).
+- **Server Action** — Form gönderilince sunucuda çalışan fonksiyon (`"use server"`); istek sayfanın kendi adresine POST, `next-action` header'ı ile.
+- **Validation (zod) / 422 / 409** — Kural kontrolü (tek şema, iki kapı) / okunuyor ama kurala aykırı / mevcut durumla çakışma.
+- **Floating point / minor units / decimal** — Yaklaşık sayı (0.1+0.2≠0.3) / parayı en küçük birimde tam sayı (qəpik, `price_minor`) / DB'nin kesin ondalık tipi.
+- **UTC / timezone / business day** — Ortak saat / `Asia/Baku` gibi yerel kural / muhasebenin gün tanımı (gece kesimi).
+- **localStorage / sessionStorage / cookie (httpOnly)** — Kalıcı tarayıcı bloknotu / sekmeyle silinen / her istekte sunucuya giden, JS'in okuyamadığı not.
+- **Server state / client state / store** — Sunucudaki resmî kaydın kopyası (TanStack Query) / sadece tarayıcıdaki durum (useState, Zustand, Redux) / paylaşılan durum kutusu.
+- **Optimistic update / rollback / invalidate** — Onay beklemeden ekranı güncelle / hata olunca geri al / kopyayı bayat sayıp yeniden çek.
+- **Core Web Vitals (LCP, INP, CLS) / Lighthouse** — Ana içerik süresi, tıklamaya tepki, beklenmedik kayma / Chrome'un ölçüm aracı.
 ## Network (Gün 5–6)
 - **OSI (7) / TCP-IP (4) katmanları** — Ağ işini katmanlara bölmek: Application (HTTP) → Transport (TCP/UDP, port) → Internet (IP) → Link (Ethernet/Wi‑Fi, MAC).
 - **Encapsulation** — Zarf içinde zarf: her katman kendi başlığını ekler; alıcı tersten açar.

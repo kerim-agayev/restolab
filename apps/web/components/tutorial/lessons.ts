@@ -7,4 +7,9 @@ export const LESSONS = [
   { day: 5, title: "Network 1: Paket nasıl yolculuk eder?", summary: "Katmanlar (OSI/TCP-IP), IP & subnet, MAC & ARP (spoofing), NAT, port, TCP vs UDP, port tarama (nmap mantığı)." },
   { day: 6, title: "Network 2: İsim, yol ve güven", summary: "DNS, DHCP, ping/traceroute, TLS (HTTPS), dinleme, firewall — ve ‘Enter’a bastın’ uçtan uca yolculuk. Sade anlatım + teknik sayfa." },
   { day: 7, title: "HTTPS, CDN ve CORS", summary: "http→https ve HSTS, CDN/edge cache (x-vercel-cache canlı lab), CORS’un neden hata verdiği, hata teşhis oyunu." },
+  { day: 8, title: "Sayfa kim tarafından, ne zaman çiziliyor?", summary: "SSG / SSR / CSR (üç mutfak), Server vs Client Component, hydration — ve aynı saatin üç şekilde çizildiği canlı lab." },
+  { day: 9, title: "Form nereye gidiyor, kim reddediyor?", summary: "“Masa aç” formu: Server Action + Route Handler, zod ile tek kural, tarayıcı vs sunucu kontrolü, 400 / 422 / 409." },
+  { day: 10, title: "Para neden float olmaz, gece yarısı neden kayar?", summary: "0.1 + 0.2, qəpik ile tam sayı, hesap bölme ve ƏDV yuvarlaması, UTC vs Bakı saati, Z raporu iş günü." },
+  { day: 11, title: "Sepet nerede durur? State, güven ve hız", summary: "localStorage sepeti ve sunucuda fiyat kontrolü, server vs client state (TanStack / Redux / Zustand), optimistic UI, Core Web Vitals." },
+  { day: 12, title: "Modül 1 tekrarı: tek butonun tüm yolculuğu", summary: "Modül haritası, uçtan uca sıralama, açık kalan sorular, 8 soruluk sınav, terminal sınavı ve öz-değerlendirme." },
 ] as const;
