@@ -12,7 +12,7 @@
 | | |
 |---|---|
 | **Tamamlanan son ders** | **Gün 7** (PR #10 merge ✅). Gün 5, 6 de merge ✅ |
-| **Devam eden ders** | **#11** Gün 8–12 (kullanıcı çalışıyor) → **#12** Gün 13 (branch `day-13/postgres-neon`, #11'in ÜSTÜNDE stacked). Sıra: #11 merge → rebase → #12 merge. #12 için kullanıcı Vercel'e `DATABASE_URL` + `DATABASE_URL_UNPOOLED` (Sensitive, Prod+Preview) eklemeli + redeploy |
+| **Devam eden ders** | #11 merge ✅. **#12** Gün 13 (base main, CLEAN). Vercel env `DATABASE_URL` + `DATABASE_URL_UNPOOLED` eklendi (Secret, Prod+Preview, kullanıcı onayıyla MCP) + redeploy → preview lab 200 ✅. Kullanıcı Gün 13'ü yapıp merge edecek |
 | **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
 | **Sonra** | **Gün 14** — modelleme: Prisma init (Prisma 7: prisma.config.ts + driver adapter), ERD, User/Restaurant/Membership, FK ihlali. Plan: [HAFTA-3.md](HAFTA-3.md) |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
@@ -47,6 +47,7 @@
 | 2026-11-15 | Kullanıcı #8'i squash merge etti → #9'da 4 dosyada conflict (squash yeni commit üretir, eski commit'ler 'farklı' görünür). Çözüm: `git rebase --onto origin/main day-05/network-1 day-06/network-2` + `git rebase --onto day-06/network-2 <eski-day06-sha> day-07/...` + force-with-lease. #9 CLEAN | #9 → #10 merge bekleniyor |
 | 2026-11-15 | #9, #10 merge ✅ (her birinde squash sonrası rebase --onto). Kullanıcı Pazar günü Gün 8–12'nin hepsini istedi → tek branch `week-02/days-08-12`, 5 commit (gün başına 1), zod eklendi. Lab API'leri (masa, cart) ve /tutorial/8/lab (use cache donuk, connection() taze) local'de doğrulandı. findstr minified HTML'de 'Line too long' → Select-String. HAFTA-3.md yazıldı | PR merge bekleniyor → Pzt Gün 13 |
 | 2026-11-15 | Kullanıcı Neon hesabı açtı, bağlantı adresini `.env.example`'a yapıştırdı (commit YOK). → `apps/web/.env.local`'e taşındı (git-ignored), şablon geri alındı, şifre hiçbir tracked dosyada yok (kontrol edildi). `neon init/deploy` kullanılmadı. Neon'da `CREATE DATABASE control_db`; sslmode=verify-full. Gün 13: `pg` + `lib/db.ts` + `/api/tutorial/db` + sayfalar. Local'de Neon'a uçtan uca test ✅ (cold start 2088 ms → 84 ms; 28P01/3D000/ENOTFOUND; leak check ✅) | PR #12 stacked; kullanıcı Vercel env eklemeli |
+| 2026-11-15 | Kullanıcı Vercel env ekleyemedi: talimatım eski terim ('Sensitive') kullanıyordu, güncel panel 'Secret / Config' diyor; ayrıca 'neden'i önce anlatmamıştım (kural 11 ihlali). Kullanıcı onayıyla Vercel MCP `create_project_env` (type sensitive → visibility secret) + redeploy. Preview: /api/tutorial/db 200 (control_db), compare ok, 28P01 ✅. **Bulgu:** fonksiyon bölgesi iad1 (ABD), Neon fra (Frankfurt) → her sorgu ~90 ms okyanus aşırı; fra1'e taşıma önerildi (kullanıcı kararı) | Gün 13 + bölge kararı bekleniyor |
 
 ---
 
