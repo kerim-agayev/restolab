@@ -7,4 +7,5 @@ export const LESSONS = [
   { day: 5, title: "Network 1: Paket nasıl yolculuk eder?", summary: "Katmanlar (OSI/TCP-IP), IP & subnet, MAC & ARP (spoofing), NAT, port, TCP vs UDP, port tarama (nmap mantığı)." },
   { day: 6, title: "Network 2: İsim, yol ve güven", summary: "DNS, DHCP, ping/traceroute, TLS (HTTPS), dinleme, firewall — ve ‘Enter’a bastın’ uçtan uca yolculuk. Sade anlatım + teknik sayfa." },
   { day: 7, title: "HTTPS, CDN ve CORS", summary: "http→https ve HSTS, CDN/edge cache (x-vercel-cache canlı lab), CORS’un neden hata verdiği, hata teşhis oyunu." },
+  { day: 8, title: "Sayfa kim tarafından, ne zaman çiziliyor?", summary: "SSG / SSR / CSR (üç mutfak), Server vs Client Component, hydration — ve aynı saatin üç şekilde çizildiği canlı lab." },
 ] as const;
