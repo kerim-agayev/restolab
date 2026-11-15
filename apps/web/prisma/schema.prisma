@@ -1,0 +1,67 @@
+// Gün 14: control_db'nin ilk tabloları (ERD).
+// Kural (normalization): her bilgi TEK bir yerde. Restoranın adı sadece restaurants tablosunda yazar;
+// üyelik satırı onu ismiyle değil numarasıyla (restaurant_id) gösterir.
+//
+// Kod tarafında PascalCase (User), veritabanında snake_case (users): @@map / @map bu çeviriyi yapar.
+// Böylece Neon SQL Editor'de tırnaksız yazabilirsin: select * from users;
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Bir kişinin bu restoranda ne iş yaptığı. Rol kişiye değil ÜYELİĞE aittir:
+/// Karim A restoranında OWNER, B restoranında WAITER olabilir. (RBAC Gün 18)
+enum Role {
+  OWNER
+  MANAGER
+  WAITER
+
+  @@map("role")
+}
+
+/// İnsan. Hangi restoranda çalıştığını burada TUTMAYIZ (çoka-çok ilişki → Membership).
+model User {
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  name        String
+  createdAt   DateTime     @default(now()) @map("created_at")
+  memberships Membership[]
+
+  @@map("users")
+}
+
+/// Restoran (kiracı / tenant). Gün 20+'da her birinin kendi veritabanı olacak; burası onun merkez sicili.
+model Restaurant {
+  id          Int          @id @default(autoincrement())
+  slug        String       @unique
+  name        String
+  timezone    String       @default("Asia/Baku")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  memberships Membership[]
+
+  @@map("restaurants")
+}
+
+/// İş sözleşmesi: "şu kişi, şu restoranda, şu rolle". İki tabloyu birbirine bağlayan köprü (join table).
+model Membership {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  restaurantId Int      @map("restaurant_id")
+  role         Role
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // FK (foreign key): user_id mutlaka users tablosunda VAR olan bir id olmalı. Kişi silinirse sözleşmeleri de silinir.
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Restoran silinmek istenirse: içinde çalışan varken SİLDİRMEZ (Restrict) → önce üyelikleri kapat.
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+
+  // Aynı kişi aynı restoranda iki kez sözleşme imzalayamaz.
+  @@unique([userId, restaurantId])
+  @@index([restaurantId])
+  @@map("memberships")
+}

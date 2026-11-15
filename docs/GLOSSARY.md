@@ -119,9 +119,18 @@ Konunun hangi gün işlendiğini ROADMAP.md'de bulursun.
 - **PostgreSQL vs MSSQL (dialect)** — Aynı dil, farklı lehçe: `LIMIT` vs `TOP`, `now()` vs `GETDATE()`, `||` vs `+`, `COALESCE` vs `ISNULL`, `TEXT`/`TIMESTAMPTZ` vs `NVARCHAR`/`DATETIME2`, `snake_case` isimler.
 - **Connection string** — Veritabanının adresi + anahtarı (protokol, kullanıcı, şifre, host, port 5432, veritabanı, sslmode). Tamamı secret.
 - **Pooled vs direct (unpooled) URL / PgBouncer / max_connections** — Santralli adres (çok kısa istek, serverless) / doğrudan hat (migration) / Postgres'in santral yazılımı / hat sınırı ("too many connections").
+- **Function region / data locality** — Kodun çalıştığı veri merkezi (Vercel: iad1 = Washington, fra1 = Frankfurt) / kodu verinin yanında çalıştır. Gün 13 vakası: iad1→fra1 ile sorgu 92 ms → 2 ms.
 - **Cold start (serverless DB)** — Uyuyan veritabanının ilk istekte uyanma gecikmesi (Neon: ilk sorgu ~2 sn, sonra ~80 ms).
 - **SQLSTATE 28P01 / 3D000 / ENOTFOUND** — Şifre yanlış / veritabanı yok / host çözülemedi (DNS).
 - **Control plane / data plane / tenant** — Merkez sicil (hangi restoran hangi DB'de, hangi kanalda: `control_db`) / restoranın kendi verisi / sistemi kullanan müşteri (restoran).
+- **Primary key / foreign key (Gün 14)** — Satırın değişmeyen numarası / başka tablodaki satırın numarası + "o satır gerçekten var olmalı" kuralı. Muhasebe fişinde hesabın adı değil kodu (100 Kasa).
+- **1–N / N–N / join table** — Bir restoranın çok masası / kişi↔restoran iki yönde çok / aradaki sözleşme tablosu (`memberships`, rol burada).
+- **ERD** — Tabloları ve bağlarını gösteren kutulu çizim (users 1──< memberships >──1 restaurants).
+- **Update / insert / delete anomaly** — Tekrarlanan bilginin bir kopyası güncellenip diğeri unutulunca çıkan tutarsızlık; normalization'ın çözdüğü şey.
+- **SQLSTATE 23503 / 23505 / 23001 / 23502 / 22P02** — FK ihlali / unique ihlali / RESTRICT (bağlı satır varken silme) / NOT NULL / enum'da olmayan değer. Prisma karşılıkları: P2003, P2002, P2003, P2011.
+- **onDelete: Cascade / Restrict** — Ana satır silinince bağlıları da sil / bağlı varken sildirme.
+- **Prisma 7: schema.prisma, prisma.config.ts, driver adapter, prisma generate** — Tek tarif dosyası / CLI ayarı (adres artık burada, .env'i kendisi okumaz) / sorguyu `pg` sürücüsüyle göndermesi / tipli client'ı üretmek (`generated/`, git'e girmez).
+- **Sequence gap** — Geri alınan insert'ler de id numarası yakar → id'lerde boşluk normaldir; fiş/fatura numarası id'den üretilmez.
 ## Cache & Redis
 - **Cache** — Pahalı sonucun hızlı bir yerde saklanmış kopyası. Buzdolabı: her seferinde markete gitmezsin.
 - **Redis** — RAM'de çalışan süper hızlı key-value veri deposu. Cache, sayaç, kuyruk, session, sıralama için.

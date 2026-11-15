@@ -11,18 +11,19 @@
 
 | | |
 |---|---|
-| **Tamamlanan son ders** | **Gün 7** (PR #10 merge ✅). Gün 5, 6 de merge ✅ |
-| **Devam eden ders** | **#11** Gün 8–12 (kullanıcı çalışıyor) → **#12** Gün 13 (branch `day-13/postgres-neon`, #11'in ÜSTÜNDE stacked). Sıra: #11 merge → rebase → #12 merge. #12 için kullanıcı Vercel'e `DATABASE_URL` + `DATABASE_URL_UNPOOLED` (Sensitive, Prod+Preview) eklemeli + redeploy |
-| **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4'ten: TIMEOUT ama logda 200 (garson/mutfak) |
-| **Sonra** | **Gün 14** — modelleme: Prisma init (Prisma 7: prisma.config.ts + driver adapter), ERD, User/Restaurant/Membership, FK ihlali. Plan: [HAFTA-3.md](HAFTA-3.md) |
+| **Tamamlanan son ders** | **Gün 13** (PR #12 merge ✅). Gün 1–12 merge ✅ |
+| **Devam eden ders** | **Gün 14** — branch `day-14/prisma-erd` (main'den, stacked DEĞİL). Kullanıcı preview'da yapacak → merge |
+| **Dikkat** | PR #12, fra1 commit'leri (79c8917, 1f17199) girmeden merge edildi → **production hâlâ iad1**. Bu dosyalar Gün 14 PR'ına taşındı (commit 1793700): #13 merge olunca production fra1'e geçer |
+| **Cevap bekleyen sorular** | Gün 5: (1) ipconfig IP ≠ ifconfig.me IP neden? (2) exit 7 vs exit 28. Gün 4: TIMEOUT ama logda 200. Gün 7: CORS açık soru |
+| **Sonra** | **Gün 15** — migrations: `prisma migrate dev`, migration dosyasını oku, Neon branch (PR başına DB), drift'i kır. Plan: [HAFTA-3.md](HAFTA-3.md) |
 | **Commit'lenmemiş** | `ogrenilecekler.txt` (kullanıcının kişisel notu — bilerek commit edilmedi, untracked kalıyor) |
 | **Canlı** | https://restolab-kappa.vercel.app · repo: https://github.com/kerim-agayev/restolab |
 
 ### Bir sonraki oturumda sırayla yapılacaklar
-1. [ ] Kullanıcı PR #8'i (Gün 5) preview'da test edip **Squash and merge** yapsın.
-2. [ ] Cevapları değerlendir → PROGRESS.md Gün 4 + Gün 5 "zorlandığı" sütunu.
-3. [ ] `git switch main` → `git pull` → `git switch -c day-06/network-2` (⚠️ kullanıcının terminali de değişir — söyle).
-4. [ ] Gün 6 dersi + `/tutorial/6` + lessons.ts → PR → preview → merge. Ders sonu: PROGRESS, GLOSSARY, bu dosya.
+1. [ ] Kullanıcı Gün 14 PR'ını (#13) preview'da test edip **Squash and merge** yapsın.
+2. [ ] Merge sonrası production'da `x-vercel-id` sonu `::fra1` mi kontrol et (Vercel MCP veya curl).
+3. [ ] TeachBack cevapları gelirse PROGRESS "zorlandığı" sütunu (Gün 4–14).
+4. [ ] `git switch main` → `git pull` → `git switch -c day-15/migrations` (⚠️ kullanıcının terminali de değişir — söyle).
 
 ---
 
@@ -47,6 +48,10 @@
 | 2026-11-15 | Kullanıcı #8'i squash merge etti → #9'da 4 dosyada conflict (squash yeni commit üretir, eski commit'ler 'farklı' görünür). Çözüm: `git rebase --onto origin/main day-05/network-1 day-06/network-2` + `git rebase --onto day-06/network-2 <eski-day06-sha> day-07/...` + force-with-lease. #9 CLEAN | #9 → #10 merge bekleniyor |
 | 2026-11-15 | #9, #10 merge ✅ (her birinde squash sonrası rebase --onto). Kullanıcı Pazar günü Gün 8–12'nin hepsini istedi → tek branch `week-02/days-08-12`, 5 commit (gün başına 1), zod eklendi. Lab API'leri (masa, cart) ve /tutorial/8/lab (use cache donuk, connection() taze) local'de doğrulandı. findstr minified HTML'de 'Line too long' → Select-String. HAFTA-3.md yazıldı | PR merge bekleniyor → Pzt Gün 13 |
 | 2026-11-15 | Kullanıcı Neon hesabı açtı, bağlantı adresini `.env.example`'a yapıştırdı (commit YOK). → `apps/web/.env.local`'e taşındı (git-ignored), şablon geri alındı, şifre hiçbir tracked dosyada yok (kontrol edildi). `neon init/deploy` kullanılmadı. Neon'da `CREATE DATABASE control_db`; sslmode=verify-full. Gün 13: `pg` + `lib/db.ts` + `/api/tutorial/db` + sayfalar. Local'de Neon'a uçtan uca test ✅ (cold start 2088 ms → 84 ms; 28P01/3D000/ENOTFOUND; leak check ✅) | PR #12 stacked; kullanıcı Vercel env eklemeli |
+| 2026-11-15 | Kullanıcı Vercel env ekleyemedi: talimatım eski terim ('Sensitive') kullanıyordu, güncel panel 'Secret / Config' diyor; ayrıca 'neden'i önce anlatmamıştım (kural 11 ihlali). Kullanıcı onayıyla Vercel MCP `create_project_env` (type sensitive → visibility secret) + redeploy. Preview: /api/tutorial/db 200 (control_db), compare ok, 28P01 ✅. **Bulgu:** fonksiyon bölgesi iad1 (ABD), Neon fra (Frankfurt) → her sorgu ~90 ms okyanus aşırı; fra1'e taşıma önerildi (kullanıcı kararı) | Gün 13 + bölge kararı bekleniyor |
+| 2026-11-15 | Kullanıcı onayıyla bölge taşındı: `apps/web/vercel.json` → `regions: ["fra1"]` (kod olarak, PR'da). Ölçüm (preview, ısınmış): ÖNCE iad1 sorgu ~92 ms / bağlantı ~565 ms → SONRA fra1 sorgu ~2 ms / bağlantı ~22–47 ms. x-vercel-id `fra1:iad1::iad1` → `fra1:iad1::fra1`. Gün 13 teknik sayfasına vaka olarak eklendi. Production merge'e kadar iad1'de | #12 merge bekleniyor |
+| 2026-11-15 | Kullanıcı #12'yi merge etti, 'gün 14 ile devam et'. Fark edildi: fra1 commit'leri squash'a girmemiş → `git checkout origin/day-13/postgres-neon -- <4 dosya>` ile Gün 14 branch'ine taşındı. Gün 14: Prisma **7.10.1** (npm `latest` = 8.0.0-rc → stabil sabitlendi), `prisma init` repoda ÇALIŞTIRILMADI (ajan skill klasörleri ekliyor) → dosyalar elle. prisma.config.ts `process.loadEnvFile('.env.local')` + UNPOOLED; lib/prisma.ts adapter-pg POOLED. Migration `init_users_restaurants` control_db'ye uygulandı, seed.sql (sahte, idempotent). Lab `/api/tutorial/erd` local'de 5/5 ✅ (200 rollback, 23503×2, 23505, 23001); veri 5 satırda kaldı. Studio Prisma 7'de rastgele port. lint/tsc/build ✅ | PR #13 açıldı → kullanıcı test |
+| 2026-11-15 | Kullanıcı Neon MCP istedi (rehber: neon.com/guides/claude-code-mcp-neon). `claude mcp add --transport http neon "https://mcp.neon.tech/mcp?projectId=summer-sunset-24930758"` → local scope, proje kilitli, read-only DEĞİL (kullanıcı 'idare edebilesin' dedi; yazma işlemleri onaylı). Durum: Needs authentication → kullanıcı `/mcp` ile OAuth yapacak. TOKENS.md §Neon 6 eklendi | OAuth bekleniyor; org hesabıysa API key yolu |
 
 ---
 
